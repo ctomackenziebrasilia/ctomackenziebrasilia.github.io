@@ -520,7 +520,7 @@ function abrir(e){
     <dt>Data</dt><dd>${e.mes ? `${MESES[e.ini.getMonth()]} de ${e.ini.getFullYear()}` : per}${prev(e) ? ' <span class="approx">previsto</span>' : ' <span class="okb">confirmado</span>'}</dd>${e.horario ? `<dt>Horário</dt><dd>${esc(e.horario)}</dd>` : ""}${e.local ? `<dt>Local</dt><dd>${esc(e.local)}</dd>` : ""}
     ${e.sigla ? `<dt>Segmentos</dt><dd>${segsDe(o).map(s=>`<span class="seg">${s}</span>`).join("") || "A definir"}</dd><dt>Área</dt><dd>${esc(o.area) || "—"}</dd>` : ""}
     ${norm(e.detalhes) ? `<dt>Detalhes</dt><dd>${esc(e.detalhes)}</dd>` : ""}
-    ${norm(o.site) ? `<dt>Site</dt><dd><a href="${esc(o.site)}" target="_blank" rel="noopener">${esc(o.site)}</a></dd>` : ""}</dl>
+    ${/^https?:\/\//i.test(norm(o.site)) ? `<dt>Site</dt><dd><a href="${esc(o.site)}" target="_blank" rel="noopener">${esc(o.site)}</a></dd>` : ""}</dl>
     ${agendaHTML(e)}
     ${e.sigla && OLI[key(e.sigla)] ? `<div><button class="linkbtn" id="verficha">Ver todas as datas da ${esc(e.sigla)}</button></div>` : ""}`;
   mostrar(card, false);
