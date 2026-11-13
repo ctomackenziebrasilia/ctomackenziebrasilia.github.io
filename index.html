@@ -133,6 +133,17 @@ details summary{cursor:pointer;padding:12px 14px;font-family:var(--display);font
 .seg{display:inline-block;font-size:11px;font-weight:600;border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-right:4px}
 footer{font-size:12px;color:var(--muted)}
 footer a{color:var(--accent)}
+.flinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.flinks .btn{font-size:12.5px;padding:5px 11px}
+.ogrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;padding:14px}
+.ocard{display:grid;gap:6px;align-content:start;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:12px 13px;border-left:3px solid var(--accent)}
+.ocard:hover{background:color-mix(in srgb,var(--bg) 70%,var(--surface))}
+.ocard .os{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.03em}
+.ocard .on{font-weight:500;line-height:1.3}
+.ocard .oa{font-size:12px;color:var(--muted)}
+.ocard .ox{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:6px;margin-top:2px}
+.ocard .ox b{color:var(--ink);font-weight:600}
+.ocount{font-size:12px;color:var(--muted);padding:12px 14px 0}
 .card{max-height:calc(100dvh - 32px);overflow:auto}
 .card.wide{max-width:560px}
 .acts{display:flex;flex-wrap:wrap;gap:8px}
@@ -214,14 +225,14 @@ body.poster-on #poster{display:block}
     <span class="hi"><span class="ev prev" style="--c:var(--t-prova)" aria-hidden="true"><b>OBMEP</b> · 2ª Fase</span> Contorno tracejado: previsão, pode mudar</span>
     <span class="hi"><span class="mesdemo" aria-hidden="true">dia a confirmar</span> Só o mês é conhecido</span>
     <span class="hi"><span class="sw" aria-hidden="true"><i style="--c:var(--t-insc)"></i><i style="--c:var(--t-prova)"></i><i style="--c:var(--t-div)"></i><i style="--c:var(--t-treino)"></i><i style="--c:var(--t-res)"></i></span> A cor indica o tipo de etapa. Toque em um tipo, acima, para mostrar ou esconder</span>
-    <span class="hi">Toque em um evento para ver detalhes e o site oficial</span>
+    <span class="hi">Toque em um evento para ver detalhes e adicionar à agenda. Em <b>Olimpíadas</b>, veja a ficha completa de cada uma</span>
   </section>
   <div class="main">
     <section class="panel">
       <div class="calhead">
         <div class="nav"><button id="prev" aria-label="Mês anterior">‹</button><button id="hoje">Hoje</button><button id="next" aria-label="Próximo mês">›</button></div>
         <h2 id="mtitle"></h2>
-        <div class="views"><button class="pill" id="vMes" aria-pressed="true">Mês</button><button class="pill" id="vLista" aria-pressed="false">Lista</button></div>
+        <div class="views"><button class="pill" id="vMes" aria-pressed="true">Mês</button><button class="pill" id="vLista" aria-pressed="false">Lista</button><button class="pill" id="vOli" aria-pressed="false">Olimpíadas</button></div>
       </div>
       <div id="view"><div class="empty">Carregando as datas…</div></div>
     </section>
@@ -230,7 +241,7 @@ body.poster-on #poster{display:block}
       <section class="panel"><details id="semdata"><summary>Ainda sem datas</summary><div class="nodate" id="nodate"></div></details></section>
     </aside>
   </div>
-  <footer>Previsões usam as datas do ano anterior e podem mudar. Confira sempre o site oficial de cada olimpíada.<span id="eqlinks"></span></footer>
+  <footer>Previsões usam as datas do ano anterior e podem mudar. Confira sempre o site oficial de cada olimpíada.<span class="flinks"><button class="btn" id="fOli">Ver todas as olimpíadas</button><a class="btn" href="#cartaz">Cartaz para imprimir</a></span><span id="eqlinks"></span></footer>
 </div>
 <div id="poster"></div>
 <div class="sheet" id="sheet" hidden><div class="card" role="dialog" aria-modal="true" aria-labelledby="dtitle" id="card"></div></div>
@@ -430,6 +441,32 @@ function linha(e){
   r.onclick = () => abrir(e);
   return r;
 }
+/* Aba "Olimpíadas": um cartão por olimpíada, com a próxima data; toque abre a ficha */
+function renderOli(){
+  const v = document.getElementById("view"); v.innerHTML = "";
+  const hoje = ymd(new Date()), q = key(state.q);
+  const lista = Object.values(OLI)
+    .filter(o => state.seg === "Todos" || segsDe(o).includes(state.seg))
+    .filter(o => !q || key(o.sigla).includes(q) || key(o.nome).includes(q) || key(o.area).includes(q))
+    .sort((a,b) => key(a.sigla).localeCompare(key(b.sigla)));
+  const c = document.createElement("div"); c.className = "ocount";
+  c.textContent = lista.length ? `${lista.length} olimpíada${lista.length > 1 ? "s" : ""}. Toque para ver todas as datas, os links oficiais e adicionar à agenda.` : "Nenhuma olimpíada com esses filtros.";
+  v.append(c);
+  const g = document.createElement("div"); g.className = "ogrid";
+  lista.forEach(o => {
+    const prox = EVS.find(e => key(e.sigla) === key(o.sigla) && ymd(e.end || e.ini) >= hoje);
+    const quando = !prox ? "Datas a divulgar" :
+      `<b>${esc(prox.tipo === "Inscrição" ? (ymd(prox.ini) < hoje ? "Inscrições até" : "Inscrições") : prox.tipo)}</b> · ${prox.mes ? MESES[prox.ini.getMonth()] : fmt(prox.tipo === "Inscrição" && ymd(prox.ini) < hoje && prox.end ? prox.end : prox.ini)}${prev(prox) ? " (previsto)" : ""}`;
+    const b = document.createElement("button"); b.className = "ocard";
+    b.innerHTML = `<span class="os">${esc(o.sigla)}</span><span class="on">${esc(o.nome || o.sigla)}</span>
+      <span class="oa">${[segsDe(o).map(s => `<span class="seg">${s}</span>`).join(""), esc(o.area)].filter(Boolean).join(" ")}</span>
+      <span class="ox">Próxima: ${quando}</span>`;
+    b.onclick = () => abrirFicha(o.sigla, true);
+    g.append(b);
+  });
+  v.append(g);
+  document.getElementById("mtitle").textContent = "Olimpíadas";
+}
 function renderProx(){
   const box = document.getElementById("prox"); box.innerHTML = "";
   const hoje = ymd(new Date());
@@ -557,6 +594,7 @@ function abrirFicha(sigla, mudarHash){
 function pelaHash(){
   const h = decodeURIComponent(location.hash.slice(1));
   if (h === "cartaz"){ cartaz(); return; }
+  if (h === "olimpiadas"){ document.body.classList.remove("poster-on"); state.view = "oli"; render(); return; }
   document.body.classList.remove("poster-on");
   if (OLI[h]) abrirFicha(h, false);
 }
@@ -600,8 +638,9 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape") fechar(); 
 function render(){
   document.getElementById("vMes").setAttribute("aria-pressed", state.view==="mes");
   document.getElementById("vLista").setAttribute("aria-pressed", state.view==="lista");
-  document.getElementById("prev").parentElement.style.visibility = state.view === "lista" ? "hidden" : "visible";
-  state.view === "mes" ? renderMes() : renderLista();
+  document.getElementById("vOli").setAttribute("aria-pressed", state.view==="oli");
+  document.getElementById("prev").parentElement.style.visibility = state.view === "mes" ? "visible" : "hidden";
+  state.view === "mes" ? renderMes() : state.view === "oli" ? renderOli() : renderLista();
   renderProx(); renderSemData();
 }
 function controles(){
@@ -618,6 +657,8 @@ function controles(){
   document.getElementById("hoje").onclick = () => { inicial(); render(); };
   document.getElementById("vMes").onclick = () => { state.view="mes"; render(); };
   document.getElementById("vLista").onclick = () => { state.view="lista"; render(); };
+  document.getElementById("vOli").onclick = () => { state.view="oli"; render(); };
+  document.getElementById("fOli").onclick = () => { state.view="oli"; render(); document.querySelector(".main").scrollIntoView({behavior:"smooth"}); };
 }
 function inicial(){
   const hoje = ymd(new Date());
@@ -643,7 +684,7 @@ function inicial(){
   }
   if (matchMedia("(max-width:640px)").matches) state.view = "lista";
   controles(); inicial(); render();
-  if (equipe) document.getElementById("eqlinks").innerHTML = ' · Equipe: <a href="#cartaz">cartaz para imprimir</a>';
+
   window.addEventListener("hashchange", pelaHash);
   if (EVS.length) pelaHash();
   if (!EVS.length) document.getElementById("view").innerHTML = '<div class="empty">As datas não puderam ser carregadas agora. Recarregue a página em alguns minutos.</div>';
