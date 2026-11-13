@@ -71,8 +71,10 @@ button{font:inherit;color:inherit;cursor:pointer}
 .legend .pill i{width:10px;height:10px;border-radius:3px;background:var(--c)}
 .legend .pill[aria-pressed="false"]{opacity:.45;text-decoration:line-through}
 .legend .pill[aria-pressed="true"]{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.meuano select{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 10px}
+.meuano.on select{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
 input[type=search]{font:inherit;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 10px;min-width:0;width:220px;max-width:100%}
-button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .main{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start}
 @media (max-width:900px){.main{grid-template-columns:minmax(0,1fr)}}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:12px}
@@ -214,6 +216,7 @@ body.poster-on #poster{display:block}
   <div class="banner" id="banner" hidden></div>
 
   <div class="bar">
+    <label class="group meuano"><span>Meu ano</span><select id="meuano" aria-label="Meu ano ou série"><option value="">Todos os anos</option></select></label>
     <div class="group" id="segs"><span>Segmento</span></div>
     <div class="group legend" id="tipos"><span>Tipo</span></div>
     <input type="search" id="q" placeholder="Buscar olimpíada (ex.: OBA)" aria-label="Buscar olimpíada">
@@ -262,7 +265,7 @@ const TIPOS = [
 const grupoDe = t => TIPOS.find(g => g.k===t || (g.m||[]).includes(t)) || TIPOS[5];
 const MESES = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
 const MCURTO = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
-const state = {seg:"Todos", off:new Set(), q:"", view:"mes", y:0, m:0};
+const state = {ano:"", seg:"Todos", off:new Set(), q:"", view:"mes", y:0, m:0};
 const equipe = location.hash === "#equipe";
 const QR = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" role="img" aria-label="QR code do calendário" shape-rendering="crispEdges"><path class="qrline" stroke="#1f1f1f" d="M2 2.5h7m2 0h1m1 0h5m2 0h2m2 0h7m-29 1h1m5 0h1m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m2 0h4m2 0h1m3 0h2m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h1m1 0h1m1 0h1m3 0h3m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h7m2 0h1m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m3 0h1m1 0h1m1 0h2m3 0h1m2 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-20 1h1m1 0h1m1 0h2m2 0h2m-19 1h1m1 0h1m1 0h1m1 0h1m5 0h3m1 0h2m2 0h1m3 0h1m2 0h1m-28 1h1m2 0h2m3 0h2m6 0h1m3 0h3m2 0h1m2 0h1m-28 1h1m2 0h3m1 0h3m1 0h2m4 0h1m3 0h3m1 0h3m-26 1h2m3 0h1m1 0h1m2 0h8m3 0h1m2 0h1m-28 1h2m2 0h1m1 0h2m1 0h1m1 0h1m2 0h1m2 0h1m2 0h3m2 0h1m1 0h2m-29 1h1m6 0h1m1 0h5m2 0h1m3 0h3m2 0h1m2 0h1m-28 1h1m1 0h1m1 0h6m3 0h1m1 0h1m5 0h2m1 0h1m1 0h2m-29 1h3m5 0h3m2 0h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h2m1 0h1m-28 1h4m1 0h4m5 0h4m1 0h4m2 0h1m1 0h2m-27 1h1m1 0h1m2 0h2m2 0h2m3 0h1m3 0h3m2 0h2m1 0h1m-29 1h1m2 0h2m1 0h2m1 0h5m2 0h1m1 0h1m1 0h1m3 0h1m2 0h2m-28 1h2m1 0h1m2 0h1m1 0h2m4 0h4m3 0h1m2 0h1m1 0h1m-28 1h1m3 0h5m2 0h2m4 0h1m1 0h6m-17 1h2m1 0h1m1 0h1m2 0h2m2 0h1m3 0h1m1 0h3m-29 1h7m3 0h2m2 0h1m3 0h3m1 0h1m1 0h2m1 0h2m-29 1h1m5 0h1m6 0h3m1 0h2m1 0h1m3 0h2m2 0h1m-29 1h1m1 0h3m1 0h1m1 0h4m2 0h5m1 0h5m2 0h2m-29 1h1m1 0h3m1 0h1m3 0h3m1 0h1m1 0h1m2 0h2m3 0h1m1 0h3m-29 1h1m1 0h3m1 0h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h1m3 0h3m2 0h1m-29 1h1m5 0h1m6 0h1m2 0h2m1 0h2m3 0h1m2 0h1m-28 1h7m1 0h1m1 0h1m2 0h2m1 0h2m1 0h4m1 0h1m2 0h2"/></svg>`;
 const SITE = /^https?:$/.test(location.protocol) ? location.origin + location.pathname : "https://ctomackenziebrasilia.github.io/";
@@ -347,10 +350,35 @@ async function fromSheet(){
 }
 
 function segsDe(o){ return ["EFAI","EFAF","EM"].filter(s => key(o?.[s.toLowerCase()]) === "ok"); }
+/* ===== Filtro "Meu ano": usa as colunas "Do ano" e "Até o ano"; se vazias, os segmentos ===== */
+const ANOS = ["1º ano EF","2º ano EF","3º ano EF","4º ano EF","5º ano EF","6º ano EF","7º ano EF","8º ano EF","9º ano EF","1ª série EM","2ª série EM","3ª série EM"];
+function anoIdx(v){ const k = key(v), n = /(\d)/.exec(k); if (!n) return -1; return /\bem\b|serie/.test(k) ? 8 + (+n[1]) : (+n[1]) - 1; }
+function faixa(o){
+  const a = anoIdx(o?.["do ano"]), b = anoIdx(o?.["ate o ano"]);
+  if (a >= 0 || b >= 0) return [a >= 0 ? a : 0, b >= 0 ? b : 11];
+  return null;
+}
+function serveAno(o, i){
+  const f = faixa(o);
+  if (f) return i >= f[0] && i <= f[1];
+  const seg = i <= 4 ? "EFAI" : i <= 8 ? "EFAF" : "EM";
+  return segsDe(o).includes(seg);
+}
+function seriesTxt(o){
+  const f = faixa(o); if (!f) return norm(o.series);
+  if (f[0] === f[1]) return ANOS[f[0]];
+  const ini = ANOS[f[0]], fim = ANOS[f[1]];
+  return ini.endsWith("EF") && fim.endsWith("EF") ? `${ini.replace(" EF","")} ao ${fim}` : `${ini} a ${fim}`;
+}
+function passaFiltro(o){
+  if (state.ano !== "" && !serveAno(o, +state.ano)) return false;
+  if (state.seg !== "Todos" && !segsDe(o).includes(state.seg)) return false;
+  return true;
+}
 function visivel(e){
   const o = OLI[key(e.sigla)];
   if (state.off.has(grupoDe(e.tipo).k)) return false;
-  if (state.seg !== "Todos" && e.sigla && !segsDe(o).includes(state.seg)) return false;
+  if (e.sigla && o && !passaFiltro(o)) return false;
   if (state.q){ const q = key(state.q); if (!key(e.sigla).includes(q) && !key(o?.nome).includes(q) && !key(e.tipo).includes(q)) return false; }
   return true;
 }
@@ -446,7 +474,7 @@ function renderOli(){
   const v = document.getElementById("view"); v.innerHTML = "";
   const hoje = ymd(new Date()), q = key(state.q);
   const lista = Object.values(OLI)
-    .filter(o => state.seg === "Todos" || segsDe(o).includes(state.seg))
+    .filter(passaFiltro)
     .filter(o => !q || key(o.sigla).includes(q) || key(o.nome).includes(q) || key(o.area).includes(q))
     .sort((a,b) => key(a.sigla).localeCompare(key(b.sigla)));
   const c = document.createElement("div"); c.className = "ocount";
@@ -476,7 +504,7 @@ function renderProx(){
 }
 function renderSemData(){
   const com = new Set(EVS.map(e => key(e.sigla)));
-  const sem = Object.values(OLI).filter(o => !com.has(key(o.sigla)) && (state.seg==="Todos" || segsDe(o).includes(state.seg)));
+  const sem = Object.values(OLI).filter(o => !com.has(key(o.sigla)) && passaFiltro(o));
   document.querySelector("#semdata summary").textContent = `Ainda sem datas (${sem.length})`;
   const nd = document.getElementById("nodate"); nd.innerHTML = "";
   sem.forEach(o => { const b = document.createElement("button"); b.textContent = o.sigla; b.title = o.nome || ""; b.onclick = () => abrirFicha(o.sigla, true); nd.append(b); });
@@ -565,7 +593,7 @@ function abrirFicha(sigla, mudarHash){
   const o = OLI[key(sigla)]; if (!o) return;
   const evs = EVS.filter(e => key(e.sigla) === key(sigla));
   const card = document.getElementById("card");
-  const info = [["Área", o.area], ["Segmentos", segsDe(o).map(s => `<span class="seg">${s}</span>`).join("") || "A definir", true], ["Séries", o.series],
+  const info = [["Área", o.area], ["Segmentos", segsDe(o).map(s => `<span class="seg">${s}</span>`).join("") || "A definir", true], ["Séries", seriesTxt(o)],
     ["Modalidade", o.modalidade], ["Custo", o.custo], ["Inscrição por", o["inscricao por"]], ["Observações", o.observacoes]]
     .filter(([, v]) => norm(v)).map(([k, v, html]) => `<dt>${k}</dt><dd>${html ? v : esc(v)}</dd>`).join("");
   const links = [["Site oficial", o.site], ["Edital / regulamento", o["edital/regulamento"]]].filter(([, v]) => /^https?:/i.test(norm(v)))
@@ -646,7 +674,11 @@ function render(){
 function controles(){
   const segs = document.getElementById("segs");
   ["Todos","EFAI","EFAF","EM"].forEach(s => { const b=document.createElement("button"); b.className="pill"; b.textContent=s; b.setAttribute("aria-pressed", s===state.seg);
-    b.onclick=()=>{ state.seg=s; segs.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed", x.textContent===s)); render(); }; segs.append(b); });
+    b.onclick=()=>{ state.seg=s; segs.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed", x.textContent===s)); if (s !== "Todos") definirAno(""); render(); }; segs.append(b); });
+  const sel = document.getElementById("meuano");
+  ANOS.forEach((a,i) => sel.add(new Option(a, i)));
+  sel.onchange = () => { definirAno(sel.value); if (sel.value !== ""){ state.seg = "Todos"; segs.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed", x.textContent==="Todos")); } render(); };
+  try { const salvo = localStorage.getItem("cto-meuano"); if (salvo !== null && ANOS[+salvo]) definirAno(salvo); } catch(_){}
   const tp = document.getElementById("tipos");
   TIPOS.filter(t => equipe || t.k !== "Prazo interno CTO").forEach(t => { const b=document.createElement("button"); b.className="pill"; b.style.setProperty("--c",`var(${t.c})`); b.innerHTML=`<i></i>${t.k}`; b.setAttribute("aria-pressed","true");
     b.onclick=()=>{ state.off.has(t.k) ? state.off.delete(t.k) : state.off.add(t.k); b.setAttribute("aria-pressed", !state.off.has(t.k)); render(); }; tp.append(b); });
@@ -659,6 +691,11 @@ function controles(){
   document.getElementById("vLista").onclick = () => { state.view="lista"; render(); };
   document.getElementById("vOli").onclick = () => { state.view="oli"; render(); };
   document.getElementById("fOli").onclick = () => { state.view="oli"; render(); document.querySelector(".main").scrollIntoView({behavior:"smooth"}); };
+}
+function definirAno(v){
+  state.ano = v; document.getElementById("meuano").value = v;
+  document.querySelector(".meuano").classList.toggle("on", v !== "");
+  try { v === "" ? localStorage.removeItem("cto-meuano") : localStorage.setItem("cto-meuano", v); } catch(_){}
 }
 function inicial(){
   const hoje = ymd(new Date());
