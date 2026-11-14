@@ -135,6 +135,7 @@ details summary{cursor:pointer;padding:12px 14px;font-family:var(--display);font
 .seg{display:inline-block;font-size:11px;font-weight:600;border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-right:4px}
 footer{font-size:12px;color:var(--muted)}
 footer a{color:var(--accent)}
+.row.past{opacity:.5}
 .flinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .flinks .btn{font-size:12.5px;padding:5px 11px}
 .ogrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;padding:14px}
@@ -474,16 +475,33 @@ function renderLista(){
   const v = document.getElementById("view"); v.innerHTML = "";
   const l = document.createElement("div"); l.className = "list";
   const hoje = ymd(new Date());
-  const itens = EVS.filter(visivel).filter(e => ymd(e.end || e.ini) >= hoje);
-  if (!itens.length){ l.innerHTML = '<div class="empty">Nenhuma data futura com esses filtros.</div>'; }
-  let mes = "";
-  itens.forEach(e => {
-    const m = `${MESES[e.ini.getMonth()]} ${e.ini.getFullYear()}`;
-    if (m !== mes){ mes = m; const h=document.createElement("div"); h.className="lmonth"; h.textContent=m; l.append(h); }
-    l.append(linha(e));
-  });
-  v.append(l);
-  document.getElementById("mtitle").textContent = "Próximas datas";
+  const titulo = document.getElementById("mtitle");
+  /* com busca: resultados de todos os meses; sem busca: só o mês escolhido (setas iguais às do calendário) */
+  if (norm(state.q)){
+    const itens = EVS.filter(visivel).filter(e => ymd(e.end || e.ini) >= hoje);
+    if (!itens.length) l.innerHTML = '<div class="empty">Nenhuma data futura encontrada.</div>';
+    let mes = "";
+    itens.forEach(e => {
+      const m = `${MESES[e.ini.getMonth()]} ${e.ini.getFullYear()}`;
+      if (m !== mes){ mes = m; const h=document.createElement("div"); h.className="lmonth"; h.textContent=m; l.append(h); }
+      l.append(linha(e));
+    });
+    v.append(l); titulo.textContent = "Resultados da busca"; return;
+  }
+  const ini = new Date(state.y, state.m, 1), fim = new Date(state.y, state.m + 1, 0);
+  const doMes = e => e.ini <= fim && (e.mes ? new Date(e.ini.getFullYear(), e.ini.getMonth()+1, 0) : (e.end || e.ini)) >= ini;
+  const itens = EVS.filter(visivel).filter(doMes);
+  if (!itens.length){
+    const prox = EVS.filter(visivel).find(e => e.ini > fim);
+    l.innerHTML = '<div class="empty">Nenhuma data neste mês com esses filtros.' + (prox ? ' <button class="linkbtn" id="irprox">Ir para o próximo mês com datas</button>' : "") + "</div>";
+    v.append(l);
+    const b = document.getElementById("irprox");
+    if (b) b.onclick = () => { state.y = prox.ini.getFullYear(); state.m = prox.ini.getMonth(); render(); };
+  } else {
+    itens.forEach(e => { const r = linha(e); if (ymd(e.end || e.ini) < hoje) r.classList.add("past"); l.append(r); });
+    v.append(l);
+  }
+  titulo.textContent = `${MESES[state.m]} ${state.y}`;
 }
 function linha(e){
   const o = OLI[key(e.sigla)];
@@ -729,7 +747,7 @@ function render(){
   document.getElementById("vMes").setAttribute("aria-pressed", state.view==="mes");
   document.getElementById("vLista").setAttribute("aria-pressed", state.view==="lista");
   document.getElementById("vOli").setAttribute("aria-pressed", state.view==="oli");
-  document.getElementById("prev").parentElement.style.visibility = state.view === "mes" ? "visible" : "hidden";
+  document.getElementById("prev").parentElement.style.visibility = state.view === "mes" || (state.view === "lista" && !norm(state.q)) ? "visible" : "hidden";
   state.view === "mes" ? renderMes() : state.view === "oli" ? renderOli() : renderLista();
   renderProx(); renderSemData();
 }
@@ -745,7 +763,7 @@ function controles(){
   TIPOS.filter(t => equipe || t.k !== "Prazo interno CTO").forEach(t => { const b=document.createElement("button"); b.className="pill"; b.style.setProperty("--c",`var(${t.c})`); b.innerHTML=`<i></i>${t.k}`; b.setAttribute("aria-pressed","true");
     b.onclick=()=>{ state.off.has(t.k) ? state.off.delete(t.k) : state.off.add(t.k); b.setAttribute("aria-pressed", !state.off.has(t.k)); render(); }; tp.append(b); });
   document.getElementById("q").oninput = ev => { state.q = ev.target.value; render(); };
-  const passo = n => { if (state.view==="lista"){ state.y += n; } else { state.m += n; if (state.m<0){state.m=11;state.y--;} if (state.m>11){state.m=0;state.y++;} } render(); };
+  const passo = n => { state.m += n; if (state.m<0){state.m=11;state.y--;} if (state.m>11){state.m=0;state.y++;} render(); };
   document.getElementById("prev").onclick = () => passo(-1);
   document.getElementById("next").onclick = () => passo(1);
   document.getElementById("hoje").onclick = () => { inicial(); render(); };
@@ -762,7 +780,8 @@ function definirAno(v){
 function inicial(){
   const hoje = ymd(new Date());
   const alvo = EVS.find(e => ymd(e.end || e.ini) >= hoje) || EVS[0];
-  const d = alvo ? alvo.ini : new Date();
+  const agora = new Date(); agora.setHours(0,0,0,0);
+  const d = alvo ? (alvo.ini < agora ? agora : alvo.ini) : agora;
   state.y = d.getFullYear(); state.m = d.getMonth();
   const cont = {}; EVS.forEach(e => cont[e.ini.getFullYear()] = (cont[e.ini.getFullYear()] || 0) + 1);
   const ano = Object.keys(cont).sort((a,b) => cont[b] - cont[a])[0];
