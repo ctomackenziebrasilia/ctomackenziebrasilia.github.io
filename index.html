@@ -165,7 +165,9 @@ footer a{color:var(--accent)}
 body.poster-on .band,body.poster-on .wrap{display:none}
 body.poster-on #poster{display:block}
 .ptools{max-width:210mm;margin:16px auto;padding:0 16px;display:flex;gap:8px;flex-wrap:wrap}
-.pa4{--ink:#1C1C1E;--muted:#6B6B70;--line:#E4E1DE;--bordo:#A8192E;--bordo2:#7A1020;color:var(--ink);background:#fff;width:210mm;max-width:100%;min-height:297mm;margin:0 auto 24px;box-shadow:0 2px 24px rgba(0,0,0,.18);display:flex;flex-direction:column;font-family:Roboto,system-ui,sans-serif;overflow:hidden}
+.pscale{margin:0 auto 24px;overflow:hidden;max-width:calc(100vw - 24px)}
+#poster{overflow-x:hidden}
+.pa4{--ink:#1C1C1E;--muted:#6B6B70;--line:#E4E1DE;--bordo:#A8192E;--bordo2:#7A1020;--t-insc:#2B5FA0;--t-prova:#B4473A;--t-div:#2E7D52;--t-treino:#6A45A8;--t-prazo:#5C6672;--t-res:#9A6B12;color-scheme:light;color:var(--ink);background:#fff;width:210mm;min-height:297mm;margin:0;transform-origin:0 0;box-shadow:0 2px 24px rgba(0,0,0,.18);display:flex;flex-direction:column;font-family:Roboto,system-ui,sans-serif;overflow:hidden}
 .pa4 .phead{position:relative;color:#fff;padding:9mm 14mm 7mm;background:linear-gradient(135deg,var(--bordo2) 0%,var(--bordo) 62%,#B8283C 100%);overflow:hidden}
 .pa4 .phead::after{content:"";position:absolute;left:14mm;right:14mm;bottom:0;height:.6mm;background:linear-gradient(90deg,rgba(255,255,255,.75),rgba(255,255,255,0))}
 .pa4 .pyear{position:absolute;right:-4mm;bottom:-13mm;font-size:60mm;line-height:1;font-weight:900;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:.35mm rgba(255,255,255,.16);pointer-events:none}
@@ -210,7 +212,8 @@ body.poster-on #poster{display:block}
 @media print{
   html,body{background:#fff!important;margin:0!important}
   body.poster-on .ptools{display:none}
-  .pa4{box-shadow:none;margin:0;width:210mm;height:296mm;min-height:0;overflow:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .pscale{width:auto!important;height:auto!important;margin:0!important;overflow:visible!important}
+  .pa4{transform:none!important;box-shadow:none;margin:0;width:210mm;height:296mm;min-height:0;overflow:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .sheet{display:none!important}
 }
 @media (max-width:640px){.day{min-height:64px;padding:4px}.ev{font-size:0;padding:0;height:6px;border-width:0;background:var(--c)}.ev.prev{opacity:.6}.ev b{display:none}.more{font-size:10px}}
@@ -653,22 +656,27 @@ function cartaz(){
   const hoje = new Date(); hoje.setHours(0,0,0,0);
   const lim = new Date(hoje); lim.setDate(lim.getDate() + 56);
   const SEM = ["dom","seg","ter","qua","qui","sex","sáb"];
+  /* data-chave de cada evento: o que acontece primeiro a partir de hoje (início, ou o fim se já começou) */
   const itens = EVS.filter(e => !["Prazo interno CTO","Prazo interno","Reunião"].includes(e.tipo))
-    .filter(e => (e.mes ? new Date(e.ini.getFullYear(), e.ini.getMonth()+1, 0) : (e.end || e.ini)) >= hoje && e.ini <= lim)
-    .map(e => ({e, d: e.tipo === "Inscrição" && e.end ? e.end : (e.ini < hoje ? (e.end || e.ini) : e.ini)}))
-    .sort((a,b) => a.d - b.d).slice(0, 18);
+    .map(e => {
+      if (e.mes) return {e, d: e.ini, ok: new Date(e.ini.getFullYear(), e.ini.getMonth()+1, 0) >= hoje && e.ini <= lim};
+      const abre = e.tipo === "Inscrição" && !e.soFim && e.end && e.ini >= hoje;
+      const d = e.ini >= hoje ? e.ini : (e.end || e.ini);
+      return {e, d, abre, ok: d >= hoje && d <= lim};
+    })
+    .filter(x => x.ok).sort((a,b) => a.d - b.d).slice(0, 18);
   const ano = document.getElementById("ano").textContent;
   const selo = document.querySelector(".band .seal")?.outerHTML || "", mk = document.querySelector(".band .mk")?.outerHTML || "";
   const dm = d => `${d.getDate()} ${MCURTO[d.getMonth()]}`;
   let mesAtual = -1, corpo = "";
-  itens.forEach(({e, d}) => {
+  itens.forEach(({e, d, abre}) => {
     const m = d.getFullYear() * 12 + d.getMonth();
     if (m !== mesAtual){ mesAtual = m; corpo += `<div class="pmes">${MESES[d.getMonth()]} ${d.getFullYear()}</div>`; }
     const o = OLI[key(e.sigla)] || {};
     const data = e.mes ? `<div class="pd mes"><span class="dd">${MCURTO[e.ini.getMonth()]}</span><span class="dw">dia a definir</span></div>`
       : `<div class="pd"><span class="dd">${String(d.getDate()).padStart(2,"0")}</span><span class="dw">${SEM[d.getDay()]}</span></div>`;
-    const rot = e.tipo === "Inscrição" ? (e.end || e.soFim ? "Fim das inscrições" : "Abrem as inscrições") : e.tipo;
-    const periodo = e.mes || !e.end ? "" : e.tipo === "Inscrição" ? (e.soFim ? "" : `Inscrições de ${dm(e.ini)} a ${dm(e.end)}`)
+    const rot = e.tipo === "Inscrição" ? (abre || (!e.end && !e.soFim) ? "Abrem as inscrições" : "Fim das inscrições") : e.tipo;
+    const periodo = e.mes || !e.end ? "" : e.tipo === "Inscrição" ? (abre ? `Inscrições até ${dm(e.end)}` : e.soFim ? "" : `Inscrições desde ${dm(e.ini)}`)
       : d === e.ini ? `De ${dm(e.ini)} a ${dm(e.end)}` : `Último dia · desde ${dm(e.ini)}`;
     const meta = [periodo, seriesTxt(o) || segsDe(o).join(", "), e.horario, e.local].filter(Boolean).join("  ·  ");
     const nome = e.sigla ? `<b>${esc(e.sigla)}</b>${o.nome ? ` <span>${esc(o.nome)}</span>` : ""}` : `<b>${esc(e.detalhes || e.tipo)}</b>`;
@@ -678,7 +686,7 @@ function cartaz(){
   const url = SITE.replace(/^https?:\/\//,"").replace(/\/$/,"");
   document.getElementById("poster").innerHTML = `
     <div class="ptools"><button class="btn pri" id="pprint">Imprimir ou salvar em PDF</button><button class="btn" id="pvoltar">Voltar ao calendário</button></div>
-    <article class="pa4">
+    <div class="pscale"><article class="pa4">
       <header class="phead"><div class="pyear" aria-hidden="true">${esc(ano)}</div>
         <div class="plogos">${selo}${mk}</div>
         <div class="pt">Centro de Treinamento Olímpico · Colégio Mackenzie Brasília</div>
@@ -693,7 +701,7 @@ function cartaz(){
         <div class="purl">${esc(url)}</div>
         <div class="pnote">Atualizado em ${fmt(hoje)}. Confira sempre o site oficial de cada olimpíada.</div>
       </div></div>
-    </article>`;
+    </article></div>`;
   document.body.classList.add("poster-on");
   fechar();
   /* mantém o cartaz em uma única folha A4: tira os últimos itens se não couber */
@@ -703,6 +711,14 @@ function cartaz(){
     const prevEl = ps[i].previousElementSibling; ps[i].remove();
     if (prevEl && prevEl.classList.contains("pmes") && !prevEl.nextElementSibling) prevEl.remove();
   }
+  /* na tela, a folha mantém o tamanho A4 e só é reduzida para caber (celular) */
+  const ajustar = () => {
+    const caixa = document.querySelector(".pscale"); if (!caixa) return;
+    const w = folha.offsetWidth, h = w * 297 / 210, s = Math.min(1, (Math.min(window.innerWidth, screen.width || 1e4, document.getElementById("poster").clientWidth) - 24) / w);
+    folha.style.transform = s < 1 ? `scale(${s})` : "";
+    caixa.style.width = `${w * s}px`; caixa.style.height = `${h * s}px`;
+  };
+  ajustar(); window.onresize = ajustar;
   document.getElementById("pprint").onclick = () => window.print();
   document.getElementById("pvoltar").onclick = () => { history.replaceState(null, "", location.pathname + location.search + (equipe ? "#equipe" : "")); document.body.classList.remove("poster-on"); };
 }
