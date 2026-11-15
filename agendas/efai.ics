@@ -1,0 +1,1258 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//CTO Mackenzie Brasilia//Calendario Olimpico//PT
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Olimpíadas CTO · Anos Iniciais (1º ao 5º ano)
+X-WR-CALDESC:Datas das olimpíadas do Centro de Treinamento Olímpico do C
+ olégio Mackenzie Brasília. https://ctomackenziebrasilia.github.io/
+X-WR-TIMEZONE:America/Sao_Paulo
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:b48fd96f305ece9d@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20261125
+DTEND;VALUE=DATE:20261126
+SUMMARY:OBLI.1 · Abrem as inscrições (previsto)
+DESCRIPTION:Olimpíada Brasileira de Língua Inglesa 1° Semestre\nData pr
+ evista com base no ano anterior: pode mudar. Confira sempre o site oficia
+ l.\nInscrições até 29/04/2027.\nPrevisão com base nas datas oficiais 
+ da OBLI 2026.1. Fase única online. Inscrição individual tem preço men
+ or quanto antes for feita. Gratuita para escolas públicas.\nSite oficial
+ : https://www.seletaeducacao.com.br/obli\nTodas as datas: https://ctomack
+ enziebrasilia.github.io/#obli.1
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:085113d72307e985@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20261125
+DTEND;VALUE=DATE:20261126
+SUMMARY:OBMF.1 · Abrem as inscrições (previsto)
+DESCRIPTION:Olimpíada Brasileira de Matemática Financeira 1° Semestre\n
+ Data prevista com base no ano anterior: pode mudar. Confira sempre o site
+  oficial.\nInscrições até 08/04/2027.\nPrevisão com base nas datas of
+ iciais de 2026. Fase única online. Gratuita para escolas públicas.\nSit
+ e oficial: https://www.seletaeducacao.com.br/obmf\nTodas as datas: https:
+ //ctomackenziebrasilia.github.io/#obmf.1
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:26476b6e22f4b9ae@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20261125
+DTEND;VALUE=DATE:20261126
+SUMMARY:TBC · Abrem as inscrições (previsto)
+DESCRIPTION:Torneio Brasileiro de Ciências\nData prevista com base no ano
+  anterior: pode mudar. Confira sempre o site oficial.\nInscrições até 
+ 26/08/2027.\nPrevisão com base nas datas oficiais de 2026. Fase única o
+ nline. Gratuita para escolas públicas.\nSite oficial: https://www.seleta
+ educacao.com.br/tbc\nTodas as datas: https://ctomackenziebrasilia.github.
+ io/#tbc
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:e7f6909bb1ec4026@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+SUMMARY:CANGURU · Abrem as inscrições (previsto)
+DESCRIPTION:Concurso Canguru de Matemática\nData prevista com base no ano
+  anterior: pode mudar. Confira sempre o site oficial.\nPrevisão com base
+  nas datas oficiais de 2026. Fim das inscrições não publicado no site 
+ oficial. Prova aplicada pela escola dentro do período.\nSite oficial: ht
+ tps://www.cangurudematematicabrasil.com.br/\nTodas as datas: https://ctom
+ ackenziebrasilia.github.io/#canguru
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:81f309659d711d04@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:MANDACARU · Abrem as inscrições (previsto)
+DESCRIPTION:Olimpíada Mandacaru de Matemática\nData prevista com base no
+  ano anterior: pode mudar. Confira sempre o site oficial.\nInscrições a
+ té 10/05/2027.\nPrevisão com base no regulamento oficial de 2026. Fase 
+ única\; a data da prova está no Calendário Oficial\, que o site public
+ a só em imagem (o levantamento do CTO indicava maio). Gabarito em 17/06.
+  Conferir a data da prova.\nSite oficial: https://olimpiadamandacaru.com.
+ br/\nTodas as datas: https://ctomackenziebrasilia.github.io/#mandacaru
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3dc66c0823643719@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270205
+DTEND;VALUE=DATE:20270206
+SUMMARY:OL.1 · Abrem as inscrições (previsto)
+DESCRIPTION:Olimpíada de Literatura 1ª Edição\nData prevista com base 
+ no ano anterior: pode mudar. Confira sempre o site oficial.\nInscrições
+  até 28/04/2027.\nPrevisão com base nas datas oficiais de 2026. Base: 1
+ 4ª edição. Provas online em dias diferentes por categoria.\nSite ofici
+ al: https://www.olimpiadadeliteratura.com.br/\nTodas as datas: https://ct
+ omackenziebrasilia.github.io/#ol.1
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:8370b57d227ee6ba@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270223
+DTEND;VALUE=DATE:20270224
+SUMMARY:OBA · Abrem as inscrições (previsto)
+DESCRIPTION:Olimpíada Brasileira de Astronomia e Astronáutica\nData prev
+ ista com base no ano anterior: pode mudar. Confira sempre o site oficial.
+ \nInscrições até 01/05/2027.\nPrevisão com base nas datas oficiais de
+  2026. Prova presencial na escola. Gabarito no mesmo dia em que é divulg
+ ado o resultado preliminar.\nSite oficial: https://www.oba.org.br/\nTodas
+  as datas: https://ctomackenziebrasilia.github.io/#oba
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:95d053891071a305@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270223
+DTEND;VALUE=DATE:20270224
+SUMMARY:OBAFOG · Abrem as inscrições (previsto)
+DESCRIPTION:Olimpíada Brasileira de Foguetes\nData prevista com base no a
+ no anterior: pode mudar. Confira sempre o site oficial.\nInscrições at
+ é 01/05/2027.\nPrevisão com base nas datas oficiais de 2026. Inscriçã
+ o junto com a OBA. A data da 1ª fase é o prazo final para os lançament
+ os dos foguetes.\nSite oficial: https://www.oba.org.br/\nTodas as datas: 
+ https://ctomackenziebrasilia.github.io/#obafog
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:9e55326db4bd4394@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270301
+DTEND;VALUE=DATE:20270302
+SUMMARY:OBHO · 1ª Fase (previsto para março\, dia a confirmar)
+DESCRIPTION:Olimpíada Brasileira de História Online\nData prevista com b
+ ase no ano anterior: pode mudar. Confira sempre o site oficial.\nO site o
+ ficial não publica as datas em texto\; datas mantidas do levantamento do
+  CTO. Conferir.\nSite oficial: https://sites.google.com/view/obhonline\nT
+ odas as datas: https://ctomackenziebrasilia.github.io/#obho
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:1ed2953b21ecdd6b@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270301
+DTEND;VALUE=DATE:20270302
+SUMMARY:OBHO · Último dia de inscrição (previsto para março\, dia a c
+ onfirmar)
+DESCRIPTION:Olimpíada Brasileira de História Online\nData prevista com b
+ ase no ano anterior: pode mudar. Confira sempre o site oficial.\nO site o
+ ficial não publica as datas em texto\; datas mantidas do levantamento do
+  CTO. Conferir.\nSite oficial: https://sites.google.com/view/obhonline\nT
+ odas as datas: https://ctomackenziebrasilia.github.io/#obho
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:499b7be397931a6c@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270306
+DTEND;VALUE=DATE:20270307
+SUMMARY:OBI · Abrem as inscrições (previsto)
+DESCRIPTION:Olimpíada Brasileira de Informática\nData prevista com base 
+ no ano anterior: pode mudar. Confira sempre o site oficial.\nInscrições
+  até 25/05/2027.\nPrevisão com base nas datas oficiais de 2026. Modalid
+ ades Iniciação e Programação têm datas diferentes dentro de cada per
+ íodo. Fim da inscrição = prazo da Iniciação (Programação vai até 
+ 06/06). Premiação = início da Semana Olímpica (convidados).\nSite ofi
+ cial: https://olimpiada.ic.unicamp.br/\nTodas as datas: https://ctomacken
+ ziebrasilia.github.io/#obi
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:a78c3685a4a4a9c8@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270310
+DTEND;VALUE=DATE:20270311
+SUMMARY:OBRL · Abrem as inscrições (previsto)
+DESCRIPTION:Olimpíada Brasileira de Raciocínio Lógico\nData prevista co
+ m base no ano anterior: pode mudar. Confira sempre o site oficial.\nInscr
+ ições até 05/09/2027.\nPrevisão com base nas datas oficiais de 2026. 
+ Provas presenciais aplicadas pela escola. Resultado = divulgação dos me
+ dalhistas.\nSite oficial: https://www.obrl.com.br/\nTodas as datas: https
+ ://ctomackenziebrasilia.github.io/#obrl
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3d0aee48624315e4@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270312
+DTEND;VALUE=DATE:20270313
+SUMMARY:OBR · Abrem as inscrições (previsto)
+DESCRIPTION:Olimpíada Brasileira de Robótica\nData prevista com base no 
+ ano anterior: pode mudar. Confira sempre o site oficial.\nInscrições at
+ é 12/06/2027.\nPrevisão com base nas datas oficiais de 2026. Datas da m
+ odalidade teórica. Modalidade prática: inscrições até 30/04 e etapas
+  regionais/estaduais de 29/05 a 13/09. Fase Final = etapa nacional práti
+ ca.\nSite oficial: https://obr.robocup.org.br/\nTodas as datas: https://c
+ tomackenziebrasilia.github.io/#obr
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:37bbc74b3b8692c5@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270316
+DTEND;VALUE=DATE:20270317
+SUMMARY:OP BÊ À BÁ · Abrem as inscrições (previsto)
+DESCRIPTION:Olimpíada de Português Bê-à-bá\nData prevista com base no
+  ano anterior: pode mudar. Confira sempre o site oficial.\nInscrições a
+ té 02/09/2027.\nPrevisão com base nas datas oficiais de 2026. Taxa paga
+  pela escola por categoria.\nSite oficial: https://olimpiadadeportugues.o
+ rg/\nTodas as datas: https://ctomackenziebrasilia.github.io/#op%20be%20a%
+ 20ba
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:5f2a788e25c97133@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270319
+DTEND;VALUE=DATE:20270326
+SUMMARY:CANGURU · 1ª Fase (previsto)
+DESCRIPTION:Concurso Canguru de Matemática\nData prevista com base no ano
+  anterior: pode mudar. Confira sempre o site oficial.\nPrevisão com base
+  nas datas oficiais de 2026. Fim das inscrições não publicado no site 
+ oficial. Prova aplicada pela escola dentro do período.\nSite oficial: ht
+ tps://www.cangurudematematicabrasil.com.br/\nTodas as datas: https://ctom
+ ackenziebrasilia.github.io/#canguru
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:8eb1f065599b4aef@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270401
+DTEND;VALUE=DATE:20270402
+SUMMARY:ONC · Abrem as inscrições (previsto)
+DESCRIPTION:Olimpíada Nacional de Ciências\nData prevista com base no an
+ o anterior: pode mudar. Confira sempre o site oficial.\nInscrições até
+  24/08/2027.\nPrevisão com base nas datas oficiais de 2026. Gratuita.\nS
+ ite oficial: https://www.onciencias.org/\nTodas as datas: https://ctomack
+ enziebrasilia.github.io/#onc
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:40721011144ffe79@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270408
+DTEND;VALUE=DATE:20270409
+SUMMARY:OBMF.1 · Último dia de inscrição (previsto)
+DESCRIPTION:Olimpíada Brasileira de Matemática Financeira 1° Semestre\n
+ Data prevista com base no ano anterior: pode mudar. Confira sempre o site
+  oficial.\nInscrições desde 25/11/2026.\nPrevisão com base nas datas o
+ ficiais de 2026. Fase única online. Gratuita para escolas públicas.\nSi
+ te oficial: https://www.seletaeducacao.com.br/obmf\nTodas as datas: https
+ ://ctomackenziebrasilia.github.io/#obmf.1
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:b5eda2f7d5d2bc4d@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270415
+DTEND;VALUE=DATE:20270416
+SUMMARY:OBMF.1 · 1ª Fase (previsto)
+DESCRIPTION:Olimpíada Brasileira de Matemática Financeira 1° Semestre\n
+ Data prevista com base no ano anterior: pode mudar. Confira sempre o site
+  oficial.\nPrevisão com base nas datas oficiais de 2026. Fase única onl
+ ine. Gratuita para escolas públicas.\nSite oficial: https://www.seletaed
+ ucacao.com.br/obmf\nTodas as datas: https://ctomackenziebrasilia.github.i
+ o/#obmf.1
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:8b778cc220c136ee@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270422
+DTEND;VALUE=DATE:20270423
+SUMMARY:OBMF.1 · Resultado (previsto)
+DESCRIPTION:Olimpíada Brasileira de Matemática Financeira 1° Semestre\n
+ Data prevista com base no ano anterior: pode mudar. Confira sempre o site
+  oficial.\nPrevisão com base nas datas oficiais de 2026. Fase única onl
+ ine. Gratuita para escolas públicas.\nSite oficial: https://www.seletaed
+ ucacao.com.br/obmf\nTodas as datas: https://ctomackenziebrasilia.github.i
+ o/#obmf.1
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:cd6575b8c5c4f70d@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270428
+DTEND;VALUE=DATE:20270429
+SUMMARY:OBMEP MIRIM · Abrem as inscrições (previsto)
+DESCRIPTION:Olimpíada Mirim - OBMEP\nData prevista com base no ano anteri
+ or: pode mudar. Confira sempre o site oficial.\nInscrições até 08/06/2
+ 027.\nPrevisão com base no regulamento oficial de 2026. Provas aplicadas
+  pela escola. Mirim 1: 2º e 3º anos\; Mirim 2: 4º e 5º anos. Resultad
+ o = certificados da 2ª fase. Escolas privadas pagam boleto logo após as
+  inscrições.\nSite oficial: https://olimpiadamirim.obmep.org.br/\nTodas
+  as datas: https://ctomackenziebrasilia.github.io/#obmep%20mirim
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:dd094ee7d25aa74e@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270428
+DTEND;VALUE=DATE:20270429
+SUMMARY:OL.1 · Último dia de inscrição (previsto)
+DESCRIPTION:Olimpíada de Literatura 1ª Edição\nData prevista com base 
+ no ano anterior: pode mudar. Confira sempre o site oficial.\nInscrições
+  desde 05/02/2027.\nPrevisão com base nas datas oficiais de 2026. Base: 
+ 14ª edição. Provas online em dias diferentes por categoria.\nSite ofic
+ ial: https://www.olimpiadadeliteratura.com.br/\nTodas as datas: https://c
+ tomackenziebrasilia.github.io/#ol.1
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3d318ad9a4457e72@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270429
+DTEND;VALUE=DATE:20270430
+SUMMARY:OBLI.1 · Último dia de inscrição (previsto)
+DESCRIPTION:Olimpíada Brasileira de Língua Inglesa 1° Semestre\nData pr
+ evista com base no ano anterior: pode mudar. Confira sempre o site oficia
+ l.\nInscrições desde 25/11/2026.\nPrevisão com base nas datas oficiais
+  da OBLI 2026.1. Fase única online. Inscrição individual tem preço me
+ nor quanto antes for feita. Gratuita para escolas públicas.\nSite oficia
+ l: https://www.seletaeducacao.com.br/obli\nTodas as datas: https://ctomac
+ kenziebrasilia.github.io/#obli.1
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:f1aff45dea92a530@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270501
+DTEND;VALUE=DATE:20270502
+SUMMARY:OBA · Último dia de inscrição (previsto)
+DESCRIPTION:Olimpíada Brasileira de Astronomia e Astronáutica\nData prev
+ ista com base no ano anterior: pode mudar. Confira sempre o site oficial.
+ \nInscrições desde 23/02/2027.\nPrevisão com base nas datas oficiais d
+ e 2026. Prova presencial na escola. Gabarito no mesmo dia em que é divul
+ gado o resultado preliminar.\nSite oficial: https://www.oba.org.br/\nToda
+ s as datas: https://ctomackenziebrasilia.github.io/#oba
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:748eb0a7429c9371@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270501
+DTEND;VALUE=DATE:20270502
+SUMMARY:OBAFOG · Último dia de inscrição (previsto)
+DESCRIPTION:Olimpíada Brasileira de Foguetes\nData prevista com base no a
+ no anterior: pode mudar. Confira sempre o site oficial.\nInscrições des
+ de 23/02/2027.\nPrevisão com base nas datas oficiais de 2026. Inscriçã
+ o junto com a OBA. A data da 1ª fase é o prazo final para os lançament
+ os dos foguetes.\nSite oficial: https://www.oba.org.br/\nTodas as datas: 
+ https://ctomackenziebrasilia.github.io/#obafog
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:44829a06da7ec661@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270506
+DTEND;VALUE=DATE:20270507
+SUMMARY:OBLI.1 · 1ª Fase (previsto)
+DESCRIPTION:Olimpíada Brasileira de Língua Inglesa 1° Semestre\nData pr
+ evista com base no ano anterior: pode mudar. Confira sempre o site oficia
+ l.\nPrevisão com base nas datas oficiais da OBLI 2026.1. Fase única onl
+ ine. Inscrição individual tem preço menor quanto antes for feita. Grat
+ uita para escolas públicas.\nSite oficial: https://www.seletaeducacao.co
+ m.br/obli\nTodas as datas: https://ctomackenziebrasilia.github.io/#obli.1
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:a1b276393d6eaa89@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270506
+DTEND;VALUE=DATE:20270515
+SUMMARY:OL.1 · 1ª Fase (previsto)
+DESCRIPTION:Olimpíada de Literatura 1ª Edição\nData prevista com base 
+ no ano anterior: pode mudar. Confira sempre o site oficial.\nPrevisão co
+ m base nas datas oficiais de 2026. Base: 14ª edição. Provas online em 
+ dias diferentes por categoria.\nSite oficial: https://www.olimpiadadelite
+ ratura.com.br/\nTodas as datas: https://ctomackenziebrasilia.github.io/#o
+ l.1
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:dd26fa059b1d671a@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270510
+DTEND;VALUE=DATE:20270511
+SUMMARY:MANDACARU · Último dia de inscrição (previsto)
+DESCRIPTION:Olimpíada Mandacaru de Matemática\nData prevista com base no
+  ano anterior: pode mudar. Confira sempre o site oficial.\nInscrições d
+ esde 01/02/2027.\nPrevisão com base no regulamento oficial de 2026. Fase
+  única\; a data da prova está no Calendário Oficial\, que o site publi
+ ca só em imagem (o levantamento do CTO indicava maio). Gabarito em 17/06
+ . Conferir a data da prova.\nSite oficial: https://olimpiadamandacaru.com
+ .br/\nTodas as datas: https://ctomackenziebrasilia.github.io/#mandacaru
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:9c0e74c2d5952347@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270513
+DTEND;VALUE=DATE:20270514
+SUMMARY:OBLI.1 · Resultado (previsto)
+DESCRIPTION:Olimpíada Brasileira de Língua Inglesa 1° Semestre\nData pr
+ evista com base no ano anterior: pode mudar. Confira sempre o site oficia
+ l.\nPrevisão com base nas datas oficiais da OBLI 2026.1. Fase única onl
+ ine. Inscrição individual tem preço menor quanto antes for feita. Grat
+ uita para escolas públicas.\nSite oficial: https://www.seletaeducacao.co
+ m.br/obli\nTodas as datas: https://ctomackenziebrasilia.github.io/#obli.1
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:b8478966719196ef@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270515
+DTEND;VALUE=DATE:20270516
+SUMMARY:OBA · 1ª Fase (previsto)
+DESCRIPTION:Olimpíada Brasileira de Astronomia e Astronáutica\nData prev
+ ista com base no ano anterior: pode mudar. Confira sempre o site oficial.
+ \nPrevisão com base nas datas oficiais de 2026. Prova presencial na esco
+ la. Gabarito no mesmo dia em que é divulgado o resultado preliminar.\nSi
+ te oficial: https://www.oba.org.br/\nTodas as datas: https://ctomackenzie
+ brasilia.github.io/#oba
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:03fc22c967a9fd5c@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270515
+DTEND;VALUE=DATE:20270516
+SUMMARY:OBAFOG · 1ª Fase (previsto)
+DESCRIPTION:Olimpíada Brasileira de Foguetes\nData prevista com base no a
+ no anterior: pode mudar. Confira sempre o site oficial.\nPrevisão com ba
+ se nas datas oficiais de 2026. Inscrição junto com a OBA. A data da 1ª
+  fase é o prazo final para os lançamentos dos foguetes.\nSite oficial: 
+ https://www.oba.org.br/\nTodas as datas: https://ctomackenziebrasilia.git
+ hub.io/#obafog
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3476475b35193640@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270518
+DTEND;VALUE=DATE:20270519
+SUMMARY:OIMSF · Último dia de inscrição (previsto)
+DESCRIPTION:Olimpíada Internacional Matemática Sem Fronteiras\nData prev
+ ista com base no ano anterior: pode mudar. Confira sempre o site oficial.
+ \nPrevisão com base nas datas oficiais de 2026. A escola escolhe um dia 
+ entre o início e o fim para aplicar. Gratuita para escolas públicas.\nS
+ ite oficial: https://www.matematicasemfronteiras.org/\nTodas as datas: ht
+ tps://ctomackenziebrasilia.github.io/#oimsf
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:d0a5127357aaa9b2@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270519
+DTEND;VALUE=DATE:20270527
+SUMMARY:OIMSF · 1ª Fase (previsto)
+DESCRIPTION:Olimpíada Internacional Matemática Sem Fronteiras\nData prev
+ ista com base no ano anterior: pode mudar. Confira sempre o site oficial.
+ \nPrevisão com base nas datas oficiais de 2026. A escola escolhe um dia 
+ entre o início e o fim para aplicar. Gratuita para escolas públicas.\nS
+ ite oficial: https://www.matematicasemfronteiras.org/\nTodas as datas: ht
+ tps://ctomackenziebrasilia.github.io/#oimsf
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:4386b37b5479794d@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270525
+DTEND;VALUE=DATE:20270526
+SUMMARY:OBI · Último dia de inscrição (previsto)
+DESCRIPTION:Olimpíada Brasileira de Informática\nData prevista com base 
+ no ano anterior: pode mudar. Confira sempre o site oficial.\nInscrições
+  desde 06/03/2027.\nPrevisão com base nas datas oficiais de 2026. Modali
+ dades Iniciação e Programação têm datas diferentes dentro de cada pe
+ ríodo. Fim da inscrição = prazo da Iniciação (Programação vai até
+  06/06). Premiação = início da Semana Olímpica (convidados).\nSite of
+ icial: https://olimpiada.ic.unicamp.br/\nTodas as datas: https://ctomacke
+ nziebrasilia.github.io/#obi
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:e87d525a47f471f9@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270526
+DTEND;VALUE=DATE:20270527
+SUMMARY:OL.1 · Resultado (previsto)
+DESCRIPTION:Olimpíada de Literatura 1ª Edição\nData prevista com base 
+ no ano anterior: pode mudar. Confira sempre o site oficial.\nPrevisão co
+ m base nas datas oficiais de 2026. Base: 14ª edição. Provas online em 
+ dias diferentes por categoria.\nSite oficial: https://www.olimpiadadelite
+ ratura.com.br/\nTodas as datas: https://ctomackenziebrasilia.github.io/#o
+ l.1
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:dec090af9cc9eb4e@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270527
+DTEND;VALUE=DATE:20270528
+SUMMARY:OBI · 1ª Fase (início) (previsto)
+DESCRIPTION:Olimpíada Brasileira de Informática\nData prevista com base 
+ no ano anterior: pode mudar. Confira sempre o site oficial.\nAté 12/06/2
+ 027.\nPrevisão com base nas datas oficiais de 2026. Modalidades Iniciaç
+ ão e Programação têm datas diferentes dentro de cada período. Fim da
+  inscrição = prazo da Iniciação (Programação vai até 06/06). Premi
+ ação = início da Semana Olímpica (convidados).\nSite oficial: https:/
+ /olimpiada.ic.unicamp.br/\nTodas as datas: https://ctomackenziebrasilia.g
+ ithub.io/#obi
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:9f97f35c32f18615@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270601
+DTEND;VALUE=DATE:20270602
+SUMMARY:OBLI.2 · Abrem as inscrições (previsto)
+DESCRIPTION:Olimpíada Brasileira de Língua Inglesa 2° Semestre\nData pr
+ evista com base no ano anterior: pode mudar. Confira sempre o site oficia
+ l.\nInscrições até 14/10/2027.\nPrevisão com base nas datas oficiais 
+ de 2026. Fase única online. Gratuita para escolas públicas.\nSite ofici
+ al: https://www.seletaeducacao.com.br/obli\nTodas as datas: https://ctoma
+ ckenziebrasilia.github.io/#obli.2
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:169ea2c6619a8ac1@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270601
+DTEND;VALUE=DATE:20270602
+SUMMARY:OBMF.2 · Abrem as inscrições (previsto)
+DESCRIPTION:Olimpíada Brasileira de Matemática Financeira 2° Semestre\n
+ Data prevista com base no ano anterior: pode mudar. Confira sempre o site
+  oficial.\nInscrições até 23/09/2027.\nPrevisão com base nas datas of
+ iciais de 2026. Fase única online. Gratuita para escolas públicas.\nSit
+ e oficial: https://www.seletaeducacao.com.br/obmf\nTodas as datas: https:
+ //ctomackenziebrasilia.github.io/#obmf.2
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:c37737c0640f3140@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270602
+DTEND;VALUE=DATE:20270603
+SUMMARY:CANGURU · Resultado (previsto)
+DESCRIPTION:Concurso Canguru de Matemática\nData prevista com base no ano
+  anterior: pode mudar. Confira sempre o site oficial.\nPrevisão com base
+  nas datas oficiais de 2026. Fim das inscrições não publicado no site 
+ oficial. Prova aplicada pela escola dentro do período.\nSite oficial: ht
+ tps://www.cangurudematematicabrasil.com.br/\nTodas as datas: https://ctom
+ ackenziebrasilia.github.io/#canguru
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:bbce6ea0695a54f4@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270608
+DTEND;VALUE=DATE:20270609
+SUMMARY:OBMEP MIRIM · Último dia de inscrição (previsto)
+DESCRIPTION:Olimpíada Mirim - OBMEP\nData prevista com base no ano anteri
+ or: pode mudar. Confira sempre o site oficial.\nInscrições desde 28/04/
+ 2027.\nPrevisão com base no regulamento oficial de 2026. Provas aplicada
+ s pela escola. Mirim 1: 2º e 3º anos\; Mirim 2: 4º e 5º anos. Resulta
+ do = certificados da 2ª fase. Escolas privadas pagam boleto logo após a
+ s inscrições.\nSite oficial: https://olimpiadamirim.obmep.org.br/\nToda
+ s as datas: https://ctomackenziebrasilia.github.io/#obmep%20mirim
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3488a677124ecdd7@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270608
+DTEND;VALUE=DATE:20270613
+SUMMARY:OBR · 1ª Fase (previsto)
+DESCRIPTION:Olimpíada Brasileira de Robótica\nData prevista com base no 
+ ano anterior: pode mudar. Confira sempre o site oficial.\nPrevisão com b
+ ase nas datas oficiais de 2026. Datas da modalidade teórica. Modalidade 
+ prática: inscrições até 30/04 e etapas regionais/estaduais de 29/05 a
+  13/09. Fase Final = etapa nacional prática.\nSite oficial: https://obr.
+ robocup.org.br/\nTodas as datas: https://ctomackenziebrasilia.github.io/#
+ obr
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:239e277c83b54d9d@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270612
+DTEND;VALUE=DATE:20270613
+SUMMARY:OBI · 1ª Fase (último dia) (previsto)
+DESCRIPTION:Olimpíada Brasileira de Informática\nData prevista com base 
+ no ano anterior: pode mudar. Confira sempre o site oficial.\nDesde 27/05/
+ 2027.\nPrevisão com base nas datas oficiais de 2026. Modalidades Inicia
+ ção e Programação têm datas diferentes dentro de cada período. Fim 
+ da inscrição = prazo da Iniciação (Programação vai até 06/06). Pre
+ miação = início da Semana Olímpica (convidados).\nSite oficial: https
+ ://olimpiada.ic.unicamp.br/\nTodas as datas: https://ctomackenziebrasilia
+ .github.io/#obi
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:baf473c190f8bf13@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270612
+DTEND;VALUE=DATE:20270613
+SUMMARY:OBR · Último dia de inscrição (previsto)
+DESCRIPTION:Olimpíada Brasileira de Robótica\nData prevista com base no 
+ ano anterior: pode mudar. Confira sempre o site oficial.\nInscrições de
+ sde 12/03/2027.\nPrevisão com base nas datas oficiais de 2026. Datas da 
+ modalidade teórica. Modalidade prática: inscrições até 30/04 e etapa
+ s regionais/estaduais de 29/05 a 13/09. Fase Final = etapa nacional prát
+ ica.\nSite oficial: https://obr.robocup.org.br/\nTodas as datas: https://
+ ctomackenziebrasilia.github.io/#obr
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:dd305716a7bc513c@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270630
+DTEND;VALUE=DATE:20270701
+SUMMARY:OBA · Resultado (previsto)
+DESCRIPTION:Olimpíada Brasileira de Astronomia e Astronáutica\nData prev
+ ista com base no ano anterior: pode mudar. Confira sempre o site oficial.
+ \nPrevisão com base nas datas oficiais de 2026. Prova presencial na esco
+ la. Gabarito no mesmo dia em que é divulgado o resultado preliminar.\nSi
+ te oficial: https://www.oba.org.br/\nTodas as datas: https://ctomackenzie
+ brasilia.github.io/#oba
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:dc1dc91aad04b354@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270630
+DTEND;VALUE=DATE:20270701
+SUMMARY:OBAFOG · Resultado (previsto)
+DESCRIPTION:Olimpíada Brasileira de Foguetes\nData prevista com base no a
+ no anterior: pode mudar. Confira sempre o site oficial.\nPrevisão com ba
+ se nas datas oficiais de 2026. Inscrição junto com a OBA. A data da 1ª
+  fase é o prazo final para os lançamentos dos foguetes.\nSite oficial: 
+ https://www.oba.org.br/\nTodas as datas: https://ctomackenziebrasilia.git
+ hub.io/#obafog
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:98dd9c5603d63dfe@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270806
+DTEND;VALUE=DATE:20270807
+SUMMARY:OBI · 2ª Fase (início) (previsto)
+DESCRIPTION:Olimpíada Brasileira de Informática\nData prevista com base 
+ no ano anterior: pode mudar. Confira sempre o site oficial.\nAté 21/08/2
+ 027.\nPrevisão com base nas datas oficiais de 2026. Modalidades Iniciaç
+ ão e Programação têm datas diferentes dentro de cada período. Fim da
+  inscrição = prazo da Iniciação (Programação vai até 06/06). Premi
+ ação = início da Semana Olímpica (convidados).\nSite oficial: https:/
+ /olimpiada.ic.unicamp.br/\nTodas as datas: https://ctomackenziebrasilia.g
+ ithub.io/#obi
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:f16a844cb8954e8c@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270810
+DTEND;VALUE=DATE:20270811
+SUMMARY:OIMSF · Resultado (previsto)
+DESCRIPTION:Olimpíada Internacional Matemática Sem Fronteiras\nData prev
+ ista com base no ano anterior: pode mudar. Confira sempre o site oficial.
+ \nPrevisão com base nas datas oficiais de 2026. A escola escolhe um dia 
+ entre o início e o fim para aplicar. Gratuita para escolas públicas.\nS
+ ite oficial: https://www.matematicasemfronteiras.org/\nTodas as datas: ht
+ tps://ctomackenziebrasilia.github.io/#oimsf
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:64f9d356201f7d35@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270811
+DTEND;VALUE=DATE:20270814
+SUMMARY:OBR · 2ª Fase (previsto)
+DESCRIPTION:Olimpíada Brasileira de Robótica\nData prevista com base no 
+ ano anterior: pode mudar. Confira sempre o site oficial.\nPrevisão com b
+ ase nas datas oficiais de 2026. Datas da modalidade teórica. Modalidade 
+ prática: inscrições até 30/04 e etapas regionais/estaduais de 29/05 a
+  13/09. Fase Final = etapa nacional prática.\nSite oficial: https://obr.
+ robocup.org.br/\nTodas as datas: https://ctomackenziebrasilia.github.io/#
+ obr
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:865ba3bbe6d4e2e8@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270820
+DTEND;VALUE=DATE:20270821
+SUMMARY:OL.2 · Abrem as inscrições (previsto)
+DESCRIPTION:Olimpíada de Literatura 2ª Edição\nData prevista com base 
+ no ano anterior: pode mudar. Confira sempre o site oficial.\nInscrições
+  até 30/10/2027.\nPrevisão com base nas datas oficiais de 2026. Base: 1
+ 6ª edição. Provas online em dias diferentes por categoria.\nSite ofici
+ al: https://www.olimpiadadeliteratura.com.br/\nTodas as datas: https://ct
+ omackenziebrasilia.github.io/#ol.2
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:674e3765906a18c3@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270821
+DTEND;VALUE=DATE:20270822
+SUMMARY:OBI · 2ª Fase (último dia) (previsto)
+DESCRIPTION:Olimpíada Brasileira de Informática\nData prevista com base 
+ no ano anterior: pode mudar. Confira sempre o site oficial.\nDesde 06/08/
+ 2027.\nPrevisão com base nas datas oficiais de 2026. Modalidades Inicia
+ ção e Programação têm datas diferentes dentro de cada período. Fim 
+ da inscrição = prazo da Iniciação (Programação vai até 06/06). Pre
+ miação = início da Semana Olímpica (convidados).\nSite oficial: https
+ ://olimpiada.ic.unicamp.br/\nTodas as datas: https://ctomackenziebrasilia
+ .github.io/#obi
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:0231802659b7cf9b@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270824
+DTEND;VALUE=DATE:20270825
+SUMMARY:OBRL · 1ª Fase (início) (previsto)
+DESCRIPTION:Olimpíada Brasileira de Raciocínio Lógico\nData prevista co
+ m base no ano anterior: pode mudar. Confira sempre o site oficial.\nAté 
+ 09/09/2027.\nPrevisão com base nas datas oficiais de 2026. Provas presen
+ ciais aplicadas pela escola. Resultado = divulgação dos medalhistas.\nS
+ ite oficial: https://www.obrl.com.br/\nTodas as datas: https://ctomackenz
+ iebrasilia.github.io/#obrl
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:7438f38d056939ab@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270824
+DTEND;VALUE=DATE:20270825
+SUMMARY:ONC · Último dia de inscrição (previsto)
+DESCRIPTION:Olimpíada Nacional de Ciências\nData prevista com base no an
+ o anterior: pode mudar. Confira sempre o site oficial.\nInscrições desd
+ e 01/04/2027.\nPrevisão com base nas datas oficiais de 2026. Gratuita.\n
+ Site oficial: https://www.onciencias.org/\nTodas as datas: https://ctomac
+ kenziebrasilia.github.io/#onc
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:35d2de4385570027@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270825
+DTEND;VALUE=DATE:20270826
+SUMMARY:OBMEP MIRIM · 1ª Fase (previsto)
+DESCRIPTION:Olimpíada Mirim - OBMEP\nData prevista com base no ano anteri
+ or: pode mudar. Confira sempre o site oficial.\nPrevisão com base no reg
+ ulamento oficial de 2026. Provas aplicadas pela escola. Mirim 1: 2º e 3
+ º anos\; Mirim 2: 4º e 5º anos. Resultado = certificados da 2ª fase. 
+ Escolas privadas pagam boleto logo após as inscrições.\nSite oficial: 
+ https://olimpiadamirim.obmep.org.br/\nTodas as datas: https://ctomackenzi
+ ebrasilia.github.io/#obmep%20mirim
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:28ea8e59049ad15e@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270826
+DTEND;VALUE=DATE:20270827
+SUMMARY:TBC · Último dia de inscrição (previsto)
+DESCRIPTION:Torneio Brasileiro de Ciências\nData prevista com base no ano
+  anterior: pode mudar. Confira sempre o site oficial.\nInscrições desde
+  25/11/2026.\nPrevisão com base nas datas oficiais de 2026. Fase única 
+ online. Gratuita para escolas públicas.\nSite oficial: https://www.selet
+ aeducacao.com.br/tbc\nTodas as datas: https://ctomackenziebrasilia.github
+ .io/#tbc
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:c3c41a40c05a650f@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270827
+DTEND;VALUE=DATE:20270830
+SUMMARY:ONC · 1ª Fase (previsto)
+DESCRIPTION:Olimpíada Nacional de Ciências\nData prevista com base no an
+ o anterior: pode mudar. Confira sempre o site oficial.\nPrevisão com bas
+ e nas datas oficiais de 2026. Gratuita.\nSite oficial: https://www.oncien
+ cias.org/\nTodas as datas: https://ctomackenziebrasilia.github.io/#onc
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ccc4d59100859113@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270902
+DTEND;VALUE=DATE:20270903
+SUMMARY:OP BÊ À BÁ · Último dia de inscrição (previsto)
+DESCRIPTION:Olimpíada de Português Bê-à-bá\nData prevista com base no
+  ano anterior: pode mudar. Confira sempre o site oficial.\nInscrições d
+ esde 16/03/2027.\nPrevisão com base nas datas oficiais de 2026. Taxa pag
+ a pela escola por categoria.\nSite oficial: https://olimpiadadeportugues.
+ org/\nTodas as datas: https://ctomackenziebrasilia.github.io/#op%20be%20a
+ %20ba
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ef5efb25d1da4b97@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270902
+DTEND;VALUE=DATE:20270903
+SUMMARY:TBC · 1ª Fase (previsto)
+DESCRIPTION:Torneio Brasileiro de Ciências\nData prevista com base no ano
+  anterior: pode mudar. Confira sempre o site oficial.\nPrevisão com base
+  nas datas oficiais de 2026. Fase única online. Gratuita para escolas p
+ úblicas.\nSite oficial: https://www.seletaeducacao.com.br/tbc\nTodas as 
+ datas: https://ctomackenziebrasilia.github.io/#tbc
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:4054525ebb66ab13@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270905
+DTEND;VALUE=DATE:20270906
+SUMMARY:OBRL · Último dia de inscrição (previsto)
+DESCRIPTION:Olimpíada Brasileira de Raciocínio Lógico\nData prevista co
+ m base no ano anterior: pode mudar. Confira sempre o site oficial.\nInscr
+ ições desde 10/03/2027.\nPrevisão com base nas datas oficiais de 2026.
+  Provas presenciais aplicadas pela escola. Resultado = divulgação dos m
+ edalhistas.\nSite oficial: https://www.obrl.com.br/\nTodas as datas: http
+ s://ctomackenziebrasilia.github.io/#obrl
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:58302d51cd00658c@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270909
+DTEND;VALUE=DATE:20270910
+SUMMARY:OBRL · 1ª Fase (último dia) (previsto)
+DESCRIPTION:Olimpíada Brasileira de Raciocínio Lógico\nData prevista co
+ m base no ano anterior: pode mudar. Confira sempre o site oficial.\nDesde
+  24/08/2027.\nPrevisão com base nas datas oficiais de 2026. Provas prese
+ nciais aplicadas pela escola. Resultado = divulgação dos medalhistas.\n
+ Site oficial: https://www.obrl.com.br/\nTodas as datas: https://ctomacken
+ ziebrasilia.github.io/#obrl
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:b8cf5d14e006751c@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270909
+DTEND;VALUE=DATE:20270910
+SUMMARY:TBC · Resultado (previsto)
+DESCRIPTION:Torneio Brasileiro de Ciências\nData prevista com base no ano
+  anterior: pode mudar. Confira sempre o site oficial.\nPrevisão com base
+  nas datas oficiais de 2026. Fase única online. Gratuita para escolas p
+ úblicas.\nSite oficial: https://www.seletaeducacao.com.br/tbc\nTodas as 
+ datas: https://ctomackenziebrasilia.github.io/#tbc
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:8c812fb037dc604a@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270910
+DTEND;VALUE=DATE:20270913
+SUMMARY:OP BÊ À BÁ · 1ª Fase (previsto)
+DESCRIPTION:Olimpíada de Português Bê-à-bá\nData prevista com base no
+  ano anterior: pode mudar. Confira sempre o site oficial.\nPrevisão com 
+ base nas datas oficiais de 2026. Taxa paga pela escola por categoria.\nSi
+ te oficial: https://olimpiadadeportugues.org/\nTodas as datas: https://ct
+ omackenziebrasilia.github.io/#op%20be%20a%20ba
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:8b50b51305d21d85@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270917
+DTEND;VALUE=DATE:20270919
+SUMMARY:ONC · 2ª Fase (previsto)
+DESCRIPTION:Olimpíada Nacional de Ciências\nData prevista com base no an
+ o anterior: pode mudar. Confira sempre o site oficial.\nPrevisão com bas
+ e nas datas oficiais de 2026. Gratuita.\nSite oficial: https://www.oncien
+ cias.org/\nTodas as datas: https://ctomackenziebrasilia.github.io/#onc
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2c04c3be5d8e0e82@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270923
+DTEND;VALUE=DATE:20270924
+SUMMARY:OBMF.2 · Último dia de inscrição (previsto)
+DESCRIPTION:Olimpíada Brasileira de Matemática Financeira 2° Semestre\n
+ Data prevista com base no ano anterior: pode mudar. Confira sempre o site
+  oficial.\nInscrições desde 01/06/2027.\nPrevisão com base nas datas o
+ ficiais de 2026. Fase única online. Gratuita para escolas públicas.\nSi
+ te oficial: https://www.seletaeducacao.com.br/obmf\nTodas as datas: https
+ ://ctomackenziebrasilia.github.io/#obmf.2
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:06975ff0bf018bf5@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270926
+DTEND;VALUE=DATE:20271004
+SUMMARY:OBI · Fase Final (previsto)
+DESCRIPTION:Olimpíada Brasileira de Informática\nData prevista com base 
+ no ano anterior: pode mudar. Confira sempre o site oficial.\nPrevisão co
+ m base nas datas oficiais de 2026. Modalidades Iniciação e Programaçã
+ o têm datas diferentes dentro de cada período. Fim da inscrição = pra
+ zo da Iniciação (Programação vai até 06/06). Premiação = início d
+ a Semana Olímpica (convidados).\nSite oficial: https://olimpiada.ic.unic
+ amp.br/\nTodas as datas: https://ctomackenziebrasilia.github.io/#obi
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:63be96d6aa16c820@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20270930
+DTEND;VALUE=DATE:20271001
+SUMMARY:OBMF.2 · 1ª Fase (previsto)
+DESCRIPTION:Olimpíada Brasileira de Matemática Financeira 2° Semestre\n
+ Data prevista com base no ano anterior: pode mudar. Confira sempre o site
+  oficial.\nPrevisão com base nas datas oficiais de 2026. Fase única onl
+ ine. Gratuita para escolas públicas.\nSite oficial: https://www.seletaed
+ ucacao.com.br/obmf\nTodas as datas: https://ctomackenziebrasilia.github.i
+ o/#obmf.2
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:0bdf3158bcfb33f8@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271001
+DTEND;VALUE=DATE:20271004
+SUMMARY:OP BÊ À BÁ · 2ª Fase (previsto)
+DESCRIPTION:Olimpíada de Português Bê-à-bá\nData prevista com base no
+  ano anterior: pode mudar. Confira sempre o site oficial.\nPrevisão com 
+ base nas datas oficiais de 2026. Taxa paga pela escola por categoria.\nSi
+ te oficial: https://olimpiadadeportugues.org/\nTodas as datas: https://ct
+ omackenziebrasilia.github.io/#op%20be%20a%20ba
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:c46a51a0eaabb0c6@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271006
+DTEND;VALUE=DATE:20271011
+SUMMARY:OBRL · 2ª Fase (previsto)
+DESCRIPTION:Olimpíada Brasileira de Raciocínio Lógico\nData prevista co
+ m base no ano anterior: pode mudar. Confira sempre o site oficial.\nPrevi
+ são com base nas datas oficiais de 2026. Provas presenciais aplicadas pe
+ la escola. Resultado = divulgação dos medalhistas.\nSite oficial: https
+ ://www.obrl.com.br/\nTodas as datas: https://ctomackenziebrasilia.github.
+ io/#obrl
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:4ab7f2300770a0e9@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271007
+DTEND;VALUE=DATE:20271008
+SUMMARY:OBMF.2 · Resultado (previsto)
+DESCRIPTION:Olimpíada Brasileira de Matemática Financeira 2° Semestre\n
+ Data prevista com base no ano anterior: pode mudar. Confira sempre o site
+  oficial.\nPrevisão com base nas datas oficiais de 2026. Fase única onl
+ ine. Gratuita para escolas públicas.\nSite oficial: https://www.seletaed
+ ucacao.com.br/obmf\nTodas as datas: https://ctomackenziebrasilia.github.i
+ o/#obmf.2
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:7e0d72fc1907fa77@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271014
+DTEND;VALUE=DATE:20271015
+SUMMARY:OBLI.2 · Último dia de inscrição (previsto)
+DESCRIPTION:Olimpíada Brasileira de Língua Inglesa 2° Semestre\nData pr
+ evista com base no ano anterior: pode mudar. Confira sempre o site oficia
+ l.\nInscrições desde 01/06/2027.\nPrevisão com base nas datas oficiais
+  de 2026. Fase única online. Gratuita para escolas públicas.\nSite ofic
+ ial: https://www.seletaeducacao.com.br/obli\nTodas as datas: https://ctom
+ ackenziebrasilia.github.io/#obli.2
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:d2817cc5b4f4bad7@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271020
+DTEND;VALUE=DATE:20271021
+SUMMARY:OP BÊ À BÁ · Resultado (previsto)
+DESCRIPTION:Olimpíada de Português Bê-à-bá\nData prevista com base no
+  ano anterior: pode mudar. Confira sempre o site oficial.\nPrevisão com 
+ base nas datas oficiais de 2026. Taxa paga pela escola por categoria.\nSi
+ te oficial: https://olimpiadadeportugues.org/\nTodas as datas: https://ct
+ omackenziebrasilia.github.io/#op%20be%20a%20ba
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:277ba2cad18a72d6@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271021
+DTEND;VALUE=DATE:20271022
+SUMMARY:OBLI.2 · 1ª Fase (previsto)
+DESCRIPTION:Olimpíada Brasileira de Língua Inglesa 2° Semestre\nData pr
+ evista com base no ano anterior: pode mudar. Confira sempre o site oficia
+ l.\nPrevisão com base nas datas oficiais de 2026. Fase única online. Gr
+ atuita para escolas públicas.\nSite oficial: https://www.seletaeducacao.
+ com.br/obli\nTodas as datas: https://ctomackenziebrasilia.github.io/#obli
+ .2
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:6ded883e5d634486@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271022
+DTEND;VALUE=DATE:20271023
+SUMMARY:OBI · Resultado (previsto)
+DESCRIPTION:Olimpíada Brasileira de Informática\nData prevista com base 
+ no ano anterior: pode mudar. Confira sempre o site oficial.\nPrevisão co
+ m base nas datas oficiais de 2026. Modalidades Iniciação e Programaçã
+ o têm datas diferentes dentro de cada período. Fim da inscrição = pra
+ zo da Iniciação (Programação vai até 06/06). Premiação = início d
+ a Semana Olímpica (convidados).\nSite oficial: https://olimpiada.ic.unic
+ amp.br/\nTodas as datas: https://ctomackenziebrasilia.github.io/#obi
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:153b93d59dd003d0@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271026
+DTEND;VALUE=DATE:20271027
+SUMMARY:OBRL · Resultado (previsto)
+DESCRIPTION:Olimpíada Brasileira de Raciocínio Lógico\nData prevista co
+ m base no ano anterior: pode mudar. Confira sempre o site oficial.\nPrevi
+ são com base nas datas oficiais de 2026. Provas presenciais aplicadas pe
+ la escola. Resultado = divulgação dos medalhistas.\nSite oficial: https
+ ://www.obrl.com.br/\nTodas as datas: https://ctomackenziebrasilia.github.
+ io/#obrl
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:a863dec82bf844c5@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271028
+DTEND;VALUE=DATE:20271029
+SUMMARY:OBLI.2 · Resultado (previsto)
+DESCRIPTION:Olimpíada Brasileira de Língua Inglesa 2° Semestre\nData pr
+ evista com base no ano anterior: pode mudar. Confira sempre o site oficia
+ l.\nPrevisão com base nas datas oficiais de 2026. Fase única online. Gr
+ atuita para escolas públicas.\nSite oficial: https://www.seletaeducacao.
+ com.br/obli\nTodas as datas: https://ctomackenziebrasilia.github.io/#obli
+ .2
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3847719cecaa8be9@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271030
+DTEND;VALUE=DATE:20271031
+SUMMARY:OL.2 · Último dia de inscrição (previsto)
+DESCRIPTION:Olimpíada de Literatura 2ª Edição\nData prevista com base 
+ no ano anterior: pode mudar. Confira sempre o site oficial.\nInscrições
+  desde 20/08/2027.\nPrevisão com base nas datas oficiais de 2026. Base: 
+ 16ª edição. Provas online em dias diferentes por categoria.\nSite ofic
+ ial: https://www.olimpiadadeliteratura.com.br/\nTodas as datas: https://c
+ tomackenziebrasilia.github.io/#ol.2
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:c23ae709c821c219@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271105
+DTEND;VALUE=DATE:20271106
+SUMMARY:OI.2 · 1ª Fase (previsto)
+DESCRIPTION:Olimpíada de Inglês 2ª Edição\nData prevista com base no 
+ ano anterior: pode mudar. Confira sempre o site oficial.\nPrevisão com b
+ ase nas datas oficiais de 2026. Data da prova da 3ª edição publicada n
+ o site oficial. Inscrições não encontradas.\nSite oficial: https://oin
+ gles.com/\nTodas as datas: https://ctomackenziebrasilia.github.io/#oi.2
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:870054e9ef61ff03@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271110
+DTEND;VALUE=DATE:20271111
+SUMMARY:OBMEP MIRIM · 2ª Fase (previsto)
+DESCRIPTION:Olimpíada Mirim - OBMEP\nData prevista com base no ano anteri
+ or: pode mudar. Confira sempre o site oficial.\nPrevisão com base no reg
+ ulamento oficial de 2026. Provas aplicadas pela escola. Mirim 1: 2º e 3
+ º anos\; Mirim 2: 4º e 5º anos. Resultado = certificados da 2ª fase. 
+ Escolas privadas pagam boleto logo após as inscrições.\nSite oficial: 
+ https://olimpiadamirim.obmep.org.br/\nTodas as datas: https://ctomackenzi
+ ebrasilia.github.io/#obmep%20mirim
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:6cfcd3e96b99abbb@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271110
+DTEND;VALUE=DATE:20271114
+SUMMARY:OL.2 · 1ª Fase (previsto)
+DESCRIPTION:Olimpíada de Literatura 2ª Edição\nData prevista com base 
+ no ano anterior: pode mudar. Confira sempre o site oficial.\nPrevisão co
+ m base nas datas oficiais de 2026. Base: 16ª edição. Provas online em 
+ dias diferentes por categoria.\nSite oficial: https://www.olimpiadadelite
+ ratura.com.br/\nTodas as datas: https://ctomackenziebrasilia.github.io/#o
+ l.2
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:64eb70c2d69e5dc4@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271117
+DTEND;VALUE=DATE:20271118
+SUMMARY:OE.2 · Resultado (previsto)
+DESCRIPTION:Olimpíada de Espanhol 2ª Edição\nData prevista com base no
+  ano anterior: pode mudar. Confira sempre o site oficial.\nPrevisão com 
+ base nas datas oficiais de 2026. Só a data do resultado da edição de f
+ im de ano foi encontrada no site oficial.\nSite oficial: https://olimpiad
+ adeespanhol.com/\nTodas as datas: https://ctomackenziebrasilia.github.io/
+ #oe.2
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:11c2fde16105b4f2@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271119
+DTEND;VALUE=DATE:20271120
+SUMMARY:OL.2 · Resultado (previsto)
+DESCRIPTION:Olimpíada de Literatura 2ª Edição\nData prevista com base 
+ no ano anterior: pode mudar. Confira sempre o site oficial.\nPrevisão co
+ m base nas datas oficiais de 2026. Base: 16ª edição. Provas online em 
+ dias diferentes por categoria.\nSite oficial: https://www.olimpiadadelite
+ ratura.com.br/\nTodas as datas: https://ctomackenziebrasilia.github.io/#o
+ l.2
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:52aae4546b3440c9@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271123
+DTEND;VALUE=DATE:20271130
+SUMMARY:OBR · Fase Final (previsto)
+DESCRIPTION:Olimpíada Brasileira de Robótica\nData prevista com base no 
+ ano anterior: pode mudar. Confira sempre o site oficial.\nPrevisão com b
+ ase nas datas oficiais de 2026. Datas da modalidade teórica. Modalidade 
+ prática: inscrições até 30/04 e etapas regionais/estaduais de 29/05 a
+  13/09. Fase Final = etapa nacional prática.\nSite oficial: https://obr.
+ robocup.org.br/\nTodas as datas: https://ctomackenziebrasilia.github.io/#
+ obr
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:6dbcaabe742d7d90@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271201
+DTEND;VALUE=DATE:20271202
+SUMMARY:OBMEP MIRIM · Resultado (previsto)
+DESCRIPTION:Olimpíada Mirim - OBMEP\nData prevista com base no ano anteri
+ or: pode mudar. Confira sempre o site oficial.\nPrevisão com base no reg
+ ulamento oficial de 2026. Provas aplicadas pela escola. Mirim 1: 2º e 3
+ º anos\; Mirim 2: 4º e 5º anos. Resultado = certificados da 2ª fase. 
+ Escolas privadas pagam boleto logo após as inscrições.\nSite oficial: 
+ https://olimpiadamirim.obmep.org.br/\nTodas as datas: https://ctomackenzi
+ ebrasilia.github.io/#obmep%20mirim
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:f97e19d3c802f4b2@ctomackenziebrasilia.github.io
+DTSTAMP:20260101T000000Z
+DTSTART;VALUE=DATE:20271206
+DTEND;VALUE=DATE:20271207
+SUMMARY:OBI · Premiação (previsto)
+DESCRIPTION:Olimpíada Brasileira de Informática\nData prevista com base 
+ no ano anterior: pode mudar. Confira sempre o site oficial.\nPrevisão co
+ m base nas datas oficiais de 2026. Modalidades Iniciação e Programaçã
+ o têm datas diferentes dentro de cada período. Fim da inscrição = pra
+ zo da Iniciação (Programação vai até 06/06). Premiação = início d
+ a Semana Olímpica (convidados).\nSite oficial: https://olimpiada.ic.unic
+ amp.br/\nTodas as datas: https://ctomackenziebrasilia.github.io/#obi
+URL:https://ctomackenziebrasilia.github.io/
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR
