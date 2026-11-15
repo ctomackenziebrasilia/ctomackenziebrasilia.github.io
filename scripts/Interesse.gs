@@ -1,8 +1,8 @@
 // Calendário Olímpico CTO – formulário "Tenho interesse".
 //
 // Cria um Google Forms para alunos e famílias demonstrarem interesse numa olimpíada.
-// As respostas vão para uma planilha PRIVADA na conta do CTO (não compartilhada) e
-// a conta do CTO recebe um e-mail a cada novo interesse.
+// As respostas vão para uma planilha PRIVADA na conta do CTO (não compartilhada).
+// Quem preenche recebe um e-mail de confirmação.
 // A lista de olimpíadas do formulário acompanha a aba Olimpiadas sozinha (todo dia).
 //
 // Instalação (uma vez, logado só na conta do CTO):
@@ -12,8 +12,10 @@
 const FORM_TITULO_CTO = 'CTO Mackenzie Brasília · Tenho interesse em uma olimpíada';
 const FORM_SEP_CTO = ' – '; // separa sigla e nome na lista; o site usa o mesmo separador
 const SERIES_CTO = ['1º ano EF','2º ano EF','3º ano EF','4º ano EF','5º ano EF','6º ano EF','7º ano EF','8º ano EF','9º ano EF','1ª série EM','2ª série EM','3ª série EM'];
-// true = quem preencher também recebe um e-mail de confirmação (sai da conta do CTO)
-const CONFIRMAR_PARA_QUEM_PREENCHEU = false;
+// true = quem preencher recebe um e-mail de confirmação (enviado pela conta do CTO)
+const CONFIRMAR_PARA_QUEM_PREENCHEU = true;
+// true = a conta do CTO também recebe um e-mail a cada novo interesse
+const AVISAR_CTO = false;
 
 // Rode UMA vez: cria o formulário, a planilha privada de respostas, os avisos e a atualização diária.
 function instalarFormulario() {
@@ -92,7 +94,7 @@ function perguntaOlimpiada_(form) {
   return form.getItems(FormApp.ItemType.LIST).filter(i => i.getTitle() === 'Olimpíada')[0].asListItem();
 }
 
-// Aviso por e-mail para a conta do CTO a cada novo interesse.
+// A cada resposta: confirmação para quem preencheu e, se ligado, aviso para a conta do CTO.
 function avisarNovoInteresse(e) {
   const resp = {};
   e.response.getItemResponses().forEach(r => {
@@ -103,7 +105,7 @@ function avisarNovoInteresse(e) {
   const planilha = 'https://docs.google.com/spreadsheets/d/' + props.getProperty('respostas_id') + '/edit';
   const linhas = ['Olimpíada', 'Nome completo do aluno', 'Série', 'Turma', 'Quem está preenchendo?', 'E-mail para contato', 'WhatsApp (opcional)', 'Alguma observação? (opcional)']
     .filter(k => resp[k]).map(k => k.replace(' (opcional)', '') + ': ' + resp[k]);
-  MailApp.sendEmail({
+  if (AVISAR_CTO) MailApp.sendEmail({
     to: Session.getEffectiveUser().getEmail(),
     subject: 'Novo interesse: ' + (resp['Olimpíada'] || 'olimpíada') + ' · ' + (resp['Nome completo do aluno'] || ''),
     body: linhas.join('\n') + '\n\nLista completa (privada): ' + planilha,
@@ -114,8 +116,9 @@ function avisarNovoInteresse(e) {
     MailApp.sendEmail({
       to: contato,
       subject: 'Recebemos seu interesse: ' + (resp['Olimpíada'] || 'olimpíada'),
-      body: 'Olá!\n\nRecebemos o interesse de ' + (resp['Nome completo do aluno'] || 'o aluno') + ' em participar da ' +
-        (resp['Olimpíada'] || 'olimpíada') + '. A equipe do Centro de Treinamento Olímpico vai entrar em contato com as próximas orientações.\n\n' +
+      body: 'Olá!\n\nRecebemos o interesse de ' + (resp['Nome completo do aluno'] || 'o aluno') + ' em participar desta olimpíada:\n' +
+        (resp['Olimpíada'] || '') + '\n\nA equipe do Centro de Treinamento Olímpico vai entrar em contato com as próximas orientações. ' +
+        'Este e-mail confirma só o interesse: a inscrição oficial é feita depois, com a equipe.\n\n' +
         'Calendário das olimpíadas: https://ctomackenziebrasilia.github.io/\n\nCTO · Colégio Mackenzie Brasília',
       name: 'CTO Mackenzie Brasília',
     });
