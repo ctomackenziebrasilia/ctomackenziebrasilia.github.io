@@ -135,6 +135,10 @@ details summary{cursor:pointer;padding:12px 14px;font-family:var(--display);font
 .seg{display:inline-block;font-size:11px;font-weight:600;border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-right:4px}
 footer{font-size:12px;color:var(--muted)}
 footer a{color:var(--accent)}
+.assrow{display:grid;gap:8px;padding:12px;border-top:1px solid var(--line)}
+.assrow:first-child{border-top:0}
+.assrow strong{display:block}
+.assrow small{color:var(--muted);font-size:12px}
 .eqbar{margin:0 0 12px;padding:10px 14px;border-radius:10px;border:1px dashed var(--brand);background:color-mix(in srgb,var(--brand) 8%,var(--surface));font-size:13px;line-height:1.45}
 .eqbar strong{color:var(--brand);margin-right:6px}
 .eqbar a{color:var(--accent);white-space:nowrap}
@@ -257,7 +261,7 @@ body.poster-on #poster{display:block}
     <span class="hi"><span class="ev prev" style="--c:var(--t-prova)" aria-hidden="true"><b>OBMEP</b> · 2ª Fase</span> Contorno tracejado: previsão, pode mudar</span>
     <span class="hi"><span class="mesdemo" aria-hidden="true">dia a confirmar</span> Só o mês é conhecido</span>
     <span class="hi"><span class="sw" aria-hidden="true"><i style="--c:var(--t-insc)"></i><i style="--c:var(--t-prova)"></i><i style="--c:var(--t-div)"></i><i style="--c:var(--t-treino)"></i><i style="--c:var(--t-res)"></i></span> A cor indica o tipo de etapa. Toque em um tipo, acima, para mostrar ou esconder</span>
-    <span class="hi">Toque em um evento para ver detalhes e adicionar à agenda. Em <b>Olimpíadas</b>, veja a ficha completa de cada uma</span>
+    <span class="hi"><button class="linkbtn" id="hAss">Assine o calendário</button> para receber todas as datas na agenda do celular. Toque em um evento para ver detalhes e adicionar à agenda. Em <b>Olimpíadas</b>, veja a ficha completa de cada uma</span>
   </section>
   <div class="main">
     <section class="panel">
@@ -273,7 +277,7 @@ body.poster-on #poster{display:block}
       <section class="panel"><details id="semdata"><summary>Ainda sem datas</summary><div class="nodate" id="nodate"></div></details></section>
     </aside>
   </div>
-  <footer>Previsões usam as datas do ano anterior e podem mudar. Confira sempre o site oficial de cada olimpíada.<span class="flinks"><button class="btn" id="fOli">Ver todas as olimpíadas</button><a class="btn" href="#cartaz">Cartaz para imprimir</a></span><span id="eqlinks"></span></footer>
+  <footer>Previsões usam as datas do ano anterior e podem mudar. Confira sempre o site oficial de cada olimpíada.<span class="flinks"><button class="btn" id="fAss">Assinar no celular</button><button class="btn" id="fOli">Ver todas as olimpíadas</button><a class="btn" href="#cartaz">Cartaz para imprimir</a></span><span id="eqlinks"></span></footer>
 </div>
 <div id="poster"></div>
 <div class="sheet" id="sheet" hidden><div class="card" role="dialog" aria-modal="true" aria-labelledby="dtitle" id="card"></div></div>
@@ -635,6 +639,37 @@ function ligarAgenda(e){
   };
 }
 
+/* ===== Assinar: agendas por segmento geradas todo dia a partir da planilha (agendas/*.ics) ===== */
+const ICO_SUB = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.5"/></svg>';
+const AGENDAS = [["efai","Anos Iniciais","1º ao 5º ano"],["efaf","Anos Finais","6º ao 9º ano"],["em","Ensino Médio","1ª à 3ª série"]];
+function abrirAssinar(){
+  const card = document.getElementById("card");
+  const base = SITE.replace(/^https?:\/\//, "");
+  card.innerHTML = `<button class="close" id="fechar" aria-label="Fechar">✕</button>
+    <span class="tag" style="--c:var(--accent)"><i></i>Agenda do celular</span>
+    <h4 id="dtitle">Assinar o calendário</h4>
+    <p class="note" style="font-size:13px;color:var(--ink)">Assine uma vez e as datas das olimpíadas aparecem sozinhas na agenda do celular, como uma agenda extra. Quando o CTO muda ou acrescenta uma data, ela se atualiza sozinha.</p>
+    <div class="fsteps" id="asslist"></div>
+    <p class="note">Escolha o segmento do aluno. As atualizações podem levar algumas horas para aparecer. No Android, se o Google Agenda não oferecer "Adicionar", abra o link no computador, entrando com a mesma conta Google. Para cancelar, remova a agenda nas configurações do aplicativo.</p>
+    <span class="ok-msg" id="asscop" aria-live="polite"></span>`;
+  const box = document.getElementById("asslist");
+  AGENDAS.forEach(([arq, nome, anos]) => {
+    const ics = `${base}agendas/${arq}.ics`;
+    const g = "https://calendar.google.com/calendar/render?cid=" + encodeURIComponent("webcal://" + ics);
+    const row = document.createElement("div"); row.className = "assrow";
+    row.innerHTML = `<div><strong>${nome}</strong><small>${anos}</small></div>
+      <div class="acts"><a class="btn pri" href="${g}" target="_blank" rel="noopener">${ICO_CAL}Google Agenda</a>
+      <a class="btn" href="webcal://${ics}">${ICO_SUB}iPhone / Outlook</a>
+      <button class="btn" data-l="https://${ics}">${ICO_LINK}Copiar link</button></div>`;
+    row.querySelector("button[data-l]").onclick = async ev => {
+      const l = ev.currentTarget.dataset.l, msg = document.getElementById("asscop");
+      try { await navigator.clipboard.writeText(l); msg.textContent = `Link de ${nome} copiado.`; } catch(_){ msg.textContent = l; }
+    };
+    box.append(row);
+  });
+  mostrar(card, true);
+}
+
 /* ===== Ficha da olimpíada: todas as etapas + informações; link próprio (#sigla) ===== */
 function abrirFicha(sigla, mudarHash){
   const o = OLI[key(sigla)]; if (!o) return;
@@ -669,6 +704,7 @@ function abrirFicha(sigla, mudarHash){
 function pelaHash(){
   const h = decodeURIComponent(location.hash.slice(1));
   if (h === "cartaz"){ cartaz(); return; }
+  if (h === "assinar"){ document.body.classList.remove("poster-on"); abrirAssinar(); return; }
   if (h === "olimpiadas"){ document.body.classList.remove("poster-on"); state.view = "oli"; render(); return; }
   document.body.classList.remove("poster-on");
   if (OLI[h]) abrirFicha(h, false);
@@ -775,6 +811,8 @@ function controles(){
   document.getElementById("vMes").onclick = () => { state.view="mes"; render(); };
   document.getElementById("vLista").onclick = () => { state.view="lista"; render(); };
   document.getElementById("vOli").onclick = () => { state.view="oli"; render(); };
+  document.getElementById("fAss").onclick = abrirAssinar;
+  document.getElementById("hAss").onclick = abrirAssinar;
   document.getElementById("fOli").onclick = () => { state.view="oli"; render(); document.querySelector(".main").scrollIntoView({behavior:"smooth"}); };
 }
 function definirAno(v){
