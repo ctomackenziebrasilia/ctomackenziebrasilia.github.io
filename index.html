@@ -159,6 +159,10 @@ details summary{cursor:pointer;padding:12px 14px;font-family:var(--display);font
 .seg{display:inline-block;font-size:11px;font-weight:600;border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-right:4px}
 footer{font-size:12px;color:var(--muted)}
 footer a{color:var(--accent)}
+.interesse{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 14px;padding:12px 14px;border-radius:10px;background:color-mix(in srgb,var(--brand) 9%,var(--surface));border:1px solid color-mix(in srgb,var(--brand) 30%,var(--line))}
+.interesse div{display:grid;gap:2px;flex:1 1 220px}
+.interesse strong{font-size:14px}
+.interesse span{font-size:12.5px;color:var(--muted)}
 .assrow{display:grid;gap:8px;padding:12px;border-top:1px solid var(--line)}
 .assrow:first-child{border-top:0}
 .assrow strong{display:block}
@@ -708,6 +712,19 @@ function abrirAssinar(){
   mostrar(card, true);
 }
 
+/* ===== Formulário "Tenho interesse" (Google Forms do CTO; respostas numa planilha privada) ===== */
+const FORM_INTERESSE = "https://docs.google.com/forms/d/e/1FAIpQLSehL4uZSmzrXhuj3wWyifLNPTrQSqoeQc4fiQkBPBcX8HfNrQ/viewform";
+const FORM_CAMPO = "entry.550699322";
+const ICO_MAO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11V7a2 2 0 0 1 4 0v3m0-1V5a2 2 0 0 1 4 0v5m0-2a2 2 0 0 1 4 0v6a7 7 0 0 1-7 7h-1a7 7 0 0 1-5.6-2.8L3 15.5a2 2 0 0 1 3-2.6L7 14"/></svg>';
+function linkInteresse(o){
+  const opcao = norm(o.nome) ? `${norm(o.sigla)} – ${norm(o.nome)}` : norm(o.sigla);
+  return `${FORM_INTERESSE}?usp=pp_url&${FORM_CAMPO}=${encodeURIComponent(opcao)}`;
+}
+function aceitaInteresse(sigla){
+  const hoje = ymd(new Date()), evs = EVS.filter(e => key(e.sigla) === key(sigla));
+  return !evs.length || evs.some(e => ymd(e.mes ? new Date(e.ini.getFullYear(), e.ini.getMonth()+1, 0) : (e.end || e.ini)) >= hoje);
+}
+
 /* ===== Ficha da olimpíada: todas as etapas + informações; link próprio (#sigla) ===== */
 function abrirFicha(sigla, mudarHash){
   const o = OLI[key(sigla)]; if (!o) return;
@@ -725,6 +742,7 @@ function abrirFicha(sigla, mudarHash){
     <strong style="font-size:14px">Datas</strong>
     <div class="fsteps" id="fsteps">${evs.length ? "" : '<div class="empty">Datas ainda não divulgadas.</div>'}</div>
     <p class="note">Toque numa data para adicionar à sua agenda.</p>
+    ${aceitaInteresse(o.sigla) ? `<div class="interesse"><div><strong>Quer participar?</strong><span>Avise a equipe do CTO. É rápido e não é a inscrição oficial: a equipe entra em contato depois.</span></div><a class="btn pri" href="${linkInteresse(o)}" target="_blank" rel="noopener">${ICO_MAO}Tenho interesse</a></div>` : ""}
     <div class="acts"><button class="btn" id="copiar">${ICO_LINK}Copiar link desta olimpíada</button><span class="ok-msg" id="copiado" aria-live="polite"></span></div>`;
   const box = document.getElementById("fsteps");
   evs.forEach(e => { const r = linha(e); r.querySelector(".rtitle").textContent = e.mes ? `${MESES[e.ini.getMonth()]}, dia a confirmar` : (e.end ? `de ${fmt(e.ini)} a ${fmt(e.end)}` : e.ini.toLocaleDateString("pt-BR", {weekday:"long", day:"numeric", month:"long"})); const s = r.querySelector(".rsub"); if (!e.horario && !e.local) s.remove(); box.append(r); });
