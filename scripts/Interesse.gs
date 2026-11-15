@@ -31,7 +31,7 @@ function instalarFormulario() {
     form.setDestination(FormApp.DestinationType.SPREADSHEET, respostas.getId());
     props.setProperty('respostas_id', respostas.getId());
     SpreadsheetApp.flush();
-    montarResumo_(respostas);
+    organizarPlanilhaInteressados();
   }
   atualizarListaOlimpiadas();
   ScriptApp.getProjectTriggers()
@@ -125,16 +125,129 @@ function avisarNovoInteresse(e) {
   }
 }
 
-// Aba "Por olimpíada" na planilha privada: quantos interessados em cada uma.
-function montarResumo_(ss) {
-  const resp = ss.getSheets().filter(s => s.getFormUrl())[0] || ss.getSheets()[0];
-  let resumo = ss.getSheetByName('Por olimpíada') || ss.insertSheet('Por olimpíada');
-  resumo.getRange('A1').setFormula(
-    "=IFERROR(QUERY('" + resp.getName() + "'!A:J;\"select B, count(A) where B is not null group by B order by count(A) desc label B 'Olimpíada', count(A) 'Interessados'\";1);\"Ainda não há respostas.\")");
-  resumo.setColumnWidth(1, 420);
-  const sobra = ss.getSheetByName('Página1') || ss.getSheetByName('Sheet1');
-  if (sobra && ss.getSheets().length > 2) ss.deleteSheet(sobra);
+// Organiza a planilha PRIVADA de interessados para a equipe (pode rodar de novo quando quiser:
+// não apaga respostas nem anotações). Cria as abas "Resumo", "Interessados" e "Como usar".
+function organizarPlanilhaInteressados() {
+  const ss = SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('respostas_id'));
+  const BORDO = '#A8192E', TINTA = '#1F1F1F', CINZA = '#6B6B70', CLARO = '#F6F3F1';
+  ss.setSpreadsheetLocale('pt_BR');
+
+  // --- Interessados (respostas do formulário + 2 colunas da equipe) ---
+  const resp = ss.getSheets().filter(s => s.getFormUrl())[0];
+  if (!resp) throw new Error('Não achei a aba de respostas do formulário.');
+  resp.setName('Interessados');
+  const nForm = resp.getLastColumn() >= 10 ? 10 : resp.getLastColumn();
+  const cab = resp.getRange(1, 1, 1, resp.getMaxColumns()).getValues()[0].map(String);
+  let colStatus = cab.indexOf('Contato (equipe)') + 1, colNotas = cab.indexOf('Anotações da equipe') + 1;
+  if (!colStatus) { colStatus = Math.max(resp.getLastColumn(), nForm) + 1; ensureCols_(resp, colStatus); resp.getRange(1, colStatus).setValue('Contato (equipe)'); }
+  if (!colNotas) { colNotas = colStatus + 1; ensureCols_(resp, colNotas); resp.getRange(1, colNotas).setValue('Anotações da equipe'); }
+  const ultCol = Math.max(colNotas, resp.getLastColumn());
+  resp.setFrozenRows(1); resp.setFrozenColumns(3);
+  resp.getRange(1, 1, 1, ultCol).setBackground(BORDO).setFontColor('#FFFFFF').setFontWeight('bold')
+    .setFontFamily('Roboto').setVerticalAlignment('middle').setWrap(true);
+  resp.getRange(1, colStatus, 1, 2).setBackground('#5C2A32');
+  resp.setRowHeight(1, 44);
+  resp.getRange(2, 1, resp.getMaxRows() - 1, ultCol).setFontFamily('Roboto').setVerticalAlignment('middle');
+  resp.getRange(2, 1, resp.getMaxRows() - 1, 1).setNumberFormat('dd/mm/yyyy hh:mm');
+  const larg = {1: 125, 2: 280, 3: 220, 4: 105, 5: 70, 6: 135, 7: 220, 8: 140, 9: 220, 10: 90};
+  Object.keys(larg).forEach(c => { if (Number(c) <= nForm) resp.setColumnWidth(Number(c), larg[c]); });
+  resp.setColumnWidth(colStatus, 150); resp.setColumnWidth(colNotas, 260);
+  if (nForm >= 10) resp.hideColumns(10); // "Autorização": sempre marcada (obrigatória)
+  resp.getRange(2, colStatus, resp.getMaxRows() - 1, 1).setDataValidation(
+    SpreadsheetApp.newDataValidation().requireValueInList(['A contatar', 'Contatado', 'Inscrito', 'Não vai participar'], true)
+      .setAllowInvalid(false).setHelpText('Atualize depois de falar com a família.').build());
+  // cores por situação do contato (vazio = novo, ainda não contatado)
+  const linhaInteira = resp.getRange(2, 1, resp.getMaxRows() - 1, ultCol);
+  const L = colLetra_(colStatus);
+  const regras = [
+    ['=AND($B2<>"";$' + L + '2="")', '#FFF4D6', '#7A5600'],
+    ['=$' + L + '2="A contatar"', '#FFF4D6', '#7A5600'],
+    ['=$' + L + '2="Contatado"', '#E7F1FB', '#1F4E86'],
+    ['=$' + L + '2="Inscrito"', '#E5F4E4', '#1E6B3A'],
+    ['=$' + L + '2="Não vai participar"', '#F0EFEC', '#8A8A8A'],
+  ].map(([f, bg, fg]) => SpreadsheetApp.newConditionalFormatRule().whenFormulaSatisfied(f)
+    .setBackground(bg).setFontColor(fg).setRanges([resp.getRange(2, colStatus, resp.getMaxRows() - 1, 1)]).build());
+  regras.push(SpreadsheetApp.newConditionalFormatRule().whenFormulaSatisfied('=$' + L + '2="Não vai participar"')
+    .setFontColor('#9A9A9A').setRanges([linhaInteira]).build());
+  resp.setConditionalFormats(regras);
+  resp.getBandings().forEach(b => b.remove());
+  if (resp.getFilter()) resp.getFilter().remove();
+  resp.getRange(1, 1, resp.getMaxRows(), ultCol).createFilter();
+  resp.setTabColor(BORDO);
+  resp.getProtections(SpreadsheetApp.ProtectionType.RANGE).forEach(p => p.remove());
+  resp.getRange(1, 1, resp.getMaxRows(), nForm).protect()
+    .setDescription('Colunas preenchidas pelo formulário: evite editar').setWarningOnly(true);
+
+  // --- Resumo ---
+  let res = ss.getSheetByName('Resumo') || ss.getSheetByName('Por olimpíada') || ss.insertSheet('Resumo');
+  res.setName('Resumo'); res.clear(); res.clearConditionalFormatRules();
+  res.setHiddenGridlines(true); res.setTabColor(TINTA);
+  res.getRange('A1:F60').setFontFamily('Roboto').setFontColor(TINTA).setVerticalAlignment('middle');
+  res.setColumnWidth(1, 20);
+  [300, 140, 140, 140, 150].forEach((w, i) => res.setColumnWidth(i + 2, w));
+  res.getRange('B2').setValue('Interessados nas olimpíadas').setFontSize(20).setFontWeight('bold');
+  res.getRange('B3').setValue('Dados de alunos: uso exclusivo da equipe do CTO. Não compartilhe esta planilha.')
+    .setFontColor(BORDO).setFontSize(10).setFontWeight('bold');
+  const I = "Interessados!", S = I + L + "2:" + L;
+  const cards = [
+    ['Interessados', '=COUNTA(' + I + 'B2:B)'],
+    ['Novos (7 dias)', '=COUNTIF(' + I + 'A2:A;">="&TODAY()-7)'],
+    ['A contatar', '=COUNTIFS(' + I + 'B2:B;"<>";' + S + ';"")+COUNTIF(' + S + ';"A contatar")'],
+    ['Inscritos', '=COUNTIF(' + S + ';"Inscrito")'],
+  ];
+  cards.forEach(([rot, f], i) => {
+    const c = 2 + i + (i > 0 ? 0 : 0);
+    res.getRange(5, c).setValue(rot).setFontSize(9).setFontColor(CINZA).setFontWeight('bold');
+    res.getRange(6, c).setFormula(f).setFontSize(24).setFontWeight('bold').setHorizontalAlignment('left');
+    res.getRange(5, c, 2, 1).setBackground(CLARO);
+  });
+  res.getRange(6, 4).setFontColor('#7A5600');
+  res.setRowHeight(6, 46);
+  res.getRange('B8').setValue('Por olimpíada').setFontSize(13).setFontWeight('bold');
+  res.getRange('B9').setFormula('=IFERROR(QUERY(' + I + 'A2:B;"select B, count(A), max(A) where B is not null group by B order by count(A) desc label B \'Olimpíada\', count(A) \'Interessados\', max(A) \'Último interesse\' format max(A) \'dd/mm/yyyy\'";0);"Ainda não há respostas.")');
+  res.getRange('E9').setValue('A contatar');
+  res.getRange('F9').setValue('Inscritos');
+  res.getRange('E10').setFormula('=BYROW(B10:B;LAMBDA(o;IF(o="";"";COUNTIFS(' + I + 'B2:B;o;' + S + ';"")+COUNTIFS(' + I + 'B2:B;o;' + S + ';"A contatar"))))');
+  res.getRange('F10').setFormula('=BYROW(B10:B;LAMBDA(o;IF(o="";"";COUNTIFS(' + I + 'B2:B;o;' + S + ';"Inscrito"))))');
+  res.getRange('B9:F9').setBackground(BORDO).setFontColor('#FFFFFF').setFontWeight('bold');
+  res.getRange('C9:F60').setHorizontalAlignment('center');
+  res.setFrozenRows(0);
+  res.setConditionalFormats([
+    SpreadsheetApp.newConditionalFormatRule().whenFormulaSatisfied('=AND($B10<>"";ISEVEN(ROW()))')
+      .setBackground(CLARO).setRanges([res.getRange('B10:F60')]).build(),
+    SpreadsheetApp.newConditionalFormatRule().whenNumberGreaterThan(0)
+      .setFontColor('#7A5600').setBold(true).setRanges([res.getRange('E10:E60')]).build(),
+  ]);
+
+  // --- Como usar ---
+  let ajuda = ss.getSheetByName('Como usar') || ss.insertSheet('Como usar');
+  ajuda.clear(); ajuda.setHiddenGridlines(true); ajuda.setTabColor(CINZA);
+  ajuda.setColumnWidth(1, 20); ajuda.setColumnWidth(2, 760);
+  const textos = [
+    ['Como usar esta planilha', 18, true],
+    ['', 10, false],
+    ['1.  Cada linha da aba "Interessados" é um pedido feito pelo formulário do site (botão "Tenho interesse" na ficha da olimpíada).', 11, false],
+    ['2.  Linhas em amarelo ainda não foram contatadas. Depois de falar com a família, escolha a situação na coluna "Contato (equipe)": Contatado, Inscrito ou Não vai participar.', 11, false],
+    ['3.  Use a coluna "Anotações da equipe" para registrar combinados (ex.: "pais confirmaram por WhatsApp em 10/03").', 11, false],
+    ['4.  Para ver só uma olimpíada: na aba "Interessados", clique no ícone de filtro do título "Olimpíada" e marque a desejada.', 11, false],
+    ['5.  A aba "Resumo" mostra os totais e quantos ainda faltam contatar em cada olimpíada. Ela se atualiza sozinha.', 11, false],
+    ['6.  Não edite as colunas que vêm do formulário (até "Alguma observação?"). Não apague a aba "Interessados" nem mude a ordem das colunas.', 11, false],
+    ['', 10, false],
+    ['Privacidade: são dados de alunos, em grande parte menores de idade. Use só para o contato sobre a olimpíada escolhida e não compartilhe esta planilha fora da equipe do CTO. Para apagar os dados de alguém que pedir, apague a linha inteira.', 10, true],
+  ];
+  textos.forEach(([txt, tam, neg], i) => ajuda.getRange(2 + i, 2).setValue(txt).setFontSize(tam).setFontWeight(neg ? 'bold' : 'normal')
+    .setFontFamily('Roboto').setWrap(true).setFontColor(i === textos.length - 1 ? BORDO : TINTA));
+
+  // ordem das abas e limpeza
+  ss.setActiveSheet(res); ss.moveActiveSheet(1);
+  ss.setActiveSheet(resp); ss.moveActiveSheet(2);
+  ss.setActiveSheet(ajuda); ss.moveActiveSheet(3);
+  ['Página1', 'Sheet1'].forEach(n => { const s = ss.getSheetByName(n); if (s && ss.getSheets().length > 3) ss.deleteSheet(s); });
+  ss.setActiveSheet(res);
+  console.log('Planilha de interessados organizada: ' + ss.getUrl());
 }
+function ensureCols_(sh, n) { if (sh.getMaxColumns() < n) sh.insertColumnsAfter(sh.getMaxColumns(), n - sh.getMaxColumns()); }
+function colLetra_(n) { let s = ''; while (n > 0) { const m = (n - 1) % 26; s = String.fromCharCode(65 + m) + s; n = Math.floor((n - 1) / 26); } return s; }
 
 // Grava na aba Listas (colunas O:P) o endereço público do formulário e o campo usado para
 // já marcar a olimpíada. Não há dados de alunos aqui: é só o link que o site usa no botão.
