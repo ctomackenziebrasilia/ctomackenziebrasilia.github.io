@@ -60,7 +60,7 @@ function montarPerguntas_(form) {
   form.addListItem().setTitle('Olimpíada').setHelpText('Se veio pelo site, ela já está marcada.').setRequired(true)
     .setChoiceValues(['(carregando)']);
   form.addTextItem().setTitle('Nome completo do aluno').setRequired(true);
-  form.addListItem().setTitle('Série').setChoiceValues(SERIES_CTO).setRequired(true);
+  form.addMultipleChoiceItem().setTitle('Série').setChoiceValues(SERIES_CTO).setRequired(true);
   form.addTextItem().setTitle('Turma').setHelpText('Ex.: A, B, 7ºC').setRequired(false);
   form.addMultipleChoiceItem().setTitle('Quem está preenchendo?').setChoiceValues(['O próprio aluno', 'Responsável']).setRequired(true);
   form.addTextItem().setTitle('E-mail para contato').setRequired(true)
@@ -69,6 +69,33 @@ function montarPerguntas_(form) {
   form.addParagraphTextItem().setTitle('Alguma observação? (opcional)').setRequired(false);
   form.addCheckboxItem().setTitle('Autorização').setRequired(true)
     .setChoiceValues(['Autorizo a equipe do CTO a usar estes dados apenas para contato sobre esta olimpíada.']);
+}
+
+// Troca a pergunta "Série" (menu, que trava no celular) por opções para tocar e refaz a planilha
+// de respostas na ordem certa. Só funciona enquanto houver no máximo 3 respostas (as de teste),
+// que são apagadas. Depois organiza a planilha para a equipe.
+function corrigirSerie() {
+  const props = PropertiesService.getScriptProperties();
+  const form = FormApp.openById(props.getProperty('form_id'));
+  if (form.getResponses().length > 3) throw new Error('Já há respostas reais: nada foi alterado. Fale com quem montou o sistema.');
+  const antigo = form.getItems(FormApp.ItemType.LIST).filter(i => i.getTitle() === 'Série')[0];
+  if (antigo) {
+    const pos = antigo.getIndex();
+    const novo = form.addMultipleChoiceItem().setTitle('Série').setChoiceValues(SERIES_CTO).setRequired(true);
+    form.moveItem(novo.getIndex(), pos);
+    form.deleteItem(pos + 1);
+  }
+  const ss = SpreadsheetApp.openById(props.getProperty('respostas_id'));
+  form.removeDestination();
+  form.deleteAllResponses();
+  SpreadsheetApp.flush();
+  const temp = ss.getSheetByName('_temp') || ss.insertSheet('_temp');
+  ss.getSheets().filter(s => s.getName() !== '_temp').forEach(s => ss.deleteSheet(s));
+  form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
+  SpreadsheetApp.flush();
+  Utilities.sleep(3000);
+  ss.deleteSheet(temp);
+  organizarPlanilhaInteressados();
 }
 
 // Mantém a lista de olimpíadas do formulário igual à aba Olimpiadas (roda todo dia às 5h).
