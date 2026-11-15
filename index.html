@@ -641,26 +641,31 @@ function ligarAgenda(e){
 
 /* ===== Assinar: agendas por segmento geradas todo dia a partir da planilha (agendas/*.ics) ===== */
 const ICO_SUB = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.5"/></svg>';
-const AGENDAS = [["efai","Anos Iniciais","1º ao 5º ano"],["efaf","Anos Finais","6º ao 9º ano"],["em","Ensino Médio","1ª à 3ª série"]];
+/* IDs das agendas públicas do Google criadas pelo script Agendas.gs (aba Listas, colunas L:M) */
+const AGENDAS = [
+  ["18147479b0874d34563d90aa8864d1e0b5fffd2cdf1248c1176ec95b204a3a8b@group.calendar.google.com","Anos Iniciais","1º ao 5º ano"],
+  ["54cdc08298e123711d100e21e641949328bce743974ace1c637f95d4f79e2a0f@group.calendar.google.com","Anos Finais","6º ao 9º ano"],
+  ["0c8926f130b92e5d6c80f768a26a51af547ee232a904e7a1bf75039f96c3eb62@group.calendar.google.com","Ensino Médio","1ª à 3ª série"]];
 function abrirAssinar(){
   const card = document.getElementById("card");
-  const base = SITE.replace(/^https?:\/\//, "");
   card.innerHTML = `<button class="close" id="fechar" aria-label="Fechar">✕</button>
     <span class="tag" style="--c:var(--accent)"><i></i>Agenda do celular</span>
     <h4 id="dtitle">Assinar o calendário</h4>
     <p class="note" style="font-size:13px;color:var(--ink)">Assine uma vez e as datas das olimpíadas aparecem sozinhas na agenda do celular, como uma agenda extra. Quando o CTO muda ou acrescenta uma data, ela se atualiza sozinha.</p>
     <div class="fsteps" id="asslist"></div>
-    <p class="note">Escolha o segmento do aluno. As atualizações podem levar algumas horas para aparecer. No Android, se o Google Agenda não oferecer "Adicionar", abra o link no computador, entrando com a mesma conta Google. Para cancelar, remova a agenda nas configurações do aplicativo.</p>
+    <p class="note">Escolha o segmento do aluno. Com o Google Agenda, as mudanças chegam na hora; no iPhone e no Outlook, podem levar algumas horas. "Ver datas" mostra a agenda no navegador, sem assinar. Para cancelar, remova a agenda nas configurações do aplicativo.</p>
     <span class="ok-msg" id="asscop" aria-live="polite"></span>`;
   const box = document.getElementById("asslist");
-  AGENDAS.forEach(([arq, nome, anos]) => {
-    const ics = `${base}agendas/${arq}.ics`;
-    const g = "https://calendar.google.com/calendar/render?cid=" + encodeURIComponent("webcal://" + ics);
+  AGENDAS.forEach(([id, nome, anos]) => {
+    const ics = `calendar.google.com/calendar/ical/${encodeURIComponent(id)}/public/basic.ics`;
+    const g = "https://calendar.google.com/calendar/u/0?cid=" + btoa(id).replace(/=+$/, "");
+    const ver = "https://calendar.google.com/calendar/embed?ctz=America%2FSao_Paulo&mode=AGENDA&src=" + encodeURIComponent(id);
     const row = document.createElement("div"); row.className = "assrow";
     row.innerHTML = `<div><strong>${nome}</strong><small>${anos}</small></div>
       <div class="acts"><a class="btn pri" href="${g}" target="_blank" rel="noopener">${ICO_CAL}Google Agenda</a>
       <a class="btn" href="webcal://${ics}">${ICO_SUB}iPhone / Outlook</a>
-      <button class="btn" data-l="https://${ics}">${ICO_LINK}Copiar link</button></div>`;
+      <button class="btn" data-l="https://${ics}">${ICO_LINK}Copiar link</button>
+      <a class="btn" href="${ver}" target="_blank" rel="noopener">Ver datas</a></div>`;
     row.querySelector("button[data-l]").onclick = async ev => {
       const l = ev.currentTarget.dataset.l, msg = document.getElementById("asscop");
       try { await navigator.clipboard.writeText(l); msg.textContent = `Link de ${nome} copiado.`; } catch(_){ msg.textContent = l; }
