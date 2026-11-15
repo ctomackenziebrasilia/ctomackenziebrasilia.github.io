@@ -196,7 +196,7 @@ function organizarPlanilhaInteressados() {
     .setBackground(bg).setFontColor(fg).setRanges([resp.getRange(2, colStatus, resp.getMaxRows() - 1, 1)]).build());
   regras.push(SpreadsheetApp.newConditionalFormatRule().whenFormulaSatisfied('=$' + L + '2="Não vai participar"')
     .setFontColor('#9A9A9A').setRanges([linhaInteira]).build());
-  resp.setConditionalFormats(regras);
+  resp.setConditionalFormatRules(regras);
   resp.getBandings().forEach(b => b.remove());
   if (resp.getFilter()) resp.getFilter().remove();
   resp.getRange(1, 1, resp.getMaxRows(), ultCol).createFilter();
@@ -239,7 +239,7 @@ function organizarPlanilhaInteressados() {
   res.getRange('B9:F9').setBackground(BORDO).setFontColor('#FFFFFF').setFontWeight('bold');
   res.getRange('C9:F60').setHorizontalAlignment('center');
   res.setFrozenRows(0);
-  res.setConditionalFormats([
+  res.setConditionalFormatRules([
     SpreadsheetApp.newConditionalFormatRule().whenFormulaSatisfied('=AND($B10<>"";ISEVEN(ROW()))')
       .setBackground(CLARO).setRanges([res.getRange('B10:F60')]).build(),
     SpreadsheetApp.newConditionalFormatRule().whenNumberGreaterThan(0)
