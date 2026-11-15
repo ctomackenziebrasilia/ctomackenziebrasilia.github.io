@@ -326,7 +326,7 @@ const SAMPLE = {"olimpiadas":[],"eventos":[],"outras":[]};
 const TIPOS = [
   {k:"Inscrição", c:"--t-insc"}, {k:"Prova", c:"--t-prova", m:["1ª Fase","2ª Fase","Fase Final"]},
   {k:"Divulgação aos alunos", c:"--t-div", m:["Divulgação extra"]}, {k:"Treinamento", c:"--t-treino"},
-  {k:"Resultado e premiação", c:"--t-res", m:["Resultado","Premiação"]}, {k:"Prazo interno CTO", c:"--t-prazo", m:["Prazo interno CTO","Prazo interno","Reunião","Outro"]}
+  {k:"Resultado e premiação", c:"--t-res", m:["Resultado","Premiação"]}, {k:"Prazo interno e reunião", c:"--t-prazo", m:["Prazo interno CTO","Prazo interno","Reunião","Outro"]}
 ];
 const grupoDe = t => TIPOS.find(g => g.k===t || (g.m||[]).includes(t)) || TIPOS[5];
 const MESES = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
@@ -353,7 +353,7 @@ const fmt = d => `${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1
 
 const ETAPAS = [
   ["Inscrição","inscricao (inicio)","inscricao (fim)"], ["Divulgação aos alunos","divulgacao aos alunos"],
-  ["Prazo interno CTO","prazo interno cto",null,true], ["1ª Fase","1ª fase (inicio)","1ª fase (fim)"],
+  ["1ª Fase","1ª fase (inicio)","1ª fase (fim)"],
   ["2ª Fase","2ª fase (inicio)","2ª fase (fim)"], ["Fase Final","fase final (inicio)","fase final (fim)"], ["Resultado","resultado"], ["Premiação","premiacao"]
 ];
 function load(data){
@@ -839,7 +839,7 @@ function controles(){
   sel.onchange = () => { definirAno(sel.value); if (sel.value !== ""){ state.seg = "Todos"; segs.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed", x.textContent==="Todos")); } render(); };
   try { const salvo = localStorage.getItem("cto-meuano"); if (salvo !== null && ANOS[+salvo]) definirAno(salvo); } catch(_){}
   const tp = document.getElementById("tipos");
-  TIPOS.filter(t => equipe || t.k !== "Prazo interno CTO").forEach(t => { const b=document.createElement("button"); b.className="pill"; b.style.setProperty("--c",`var(${t.c})`); b.innerHTML=`<i></i>${t.k}`; b.setAttribute("aria-pressed","true");
+  TIPOS.filter(t => equipe || t.k !== "Prazo interno e reunião").forEach(t => { const b=document.createElement("button"); b.className="pill"; b.style.setProperty("--c",`var(${t.c})`); b.innerHTML=`<i></i>${t.k}`; b.setAttribute("aria-pressed","true");
     b.onclick=()=>{ state.off.has(t.k) ? state.off.delete(t.k) : state.off.add(t.k); b.setAttribute("aria-pressed", !state.off.has(t.k)); render(); }; tp.append(b); });
   document.getElementById("q").oninput = ev => { state.q = ev.target.value; render(); };
   const passo = n => { state.m += n; if (state.m<0){state.m=11;state.y--;} if (state.m>11){state.m=0;state.y++;} render(); };
