@@ -1,16 +1,14 @@
-/**
- * Calendário Olímpico CTO – agendas públicas do Google para as famílias assinarem.
- *
- * Cria 3 agendas na conta que autorizar este script (deve ser a conta do CTO):
- *   Anos Iniciais (1º ao 5º ano), Anos Finais (6º ao 9º ano) e Ensino Médio.
- * A cada 2 horas copia para elas as datas PÚBLICAS da planilha. Prazos internos,
- * reuniões e tudo marcado "Somente equipe" ficam de fora.
- *
- * Instalação (uma vez, no computador, logado só na conta do CTO):
- *   1. Extensões → Apps Script → botão + ao lado de "Arquivos" → Script → nome "Agendas" → cole este código.
- *   2. Em "Serviços" (+), adicione "Google Calendar API".
- *   3. Escolha a função instalarAgendas no menu de cima e clique em Executar. Autorize.
- */
+// Calendário Olímpico CTO – agendas públicas do Google para as famílias assinarem.
+//
+// Cria 3 agendas na conta que autorizar este script (deve ser a conta do CTO):
+//   Anos Iniciais (1º ao 5º ano), Anos Finais (6º ao 9º ano) e Ensino Médio.
+// A cada 2 horas copia para elas as datas PÚBLICAS da planilha. Prazos internos,
+// reuniões e tudo marcado "Somente equipe" ficam de fora.
+//
+// Instalação (uma vez, no computador, logado só na conta do CTO):
+//   1. Extensões → Apps Script → botão + ao lado de "Arquivos" → Script → nome "Agendas" → cole este código.
+//   2. Em "Serviços" (+), adicione "Google Calendar API".
+//   3. Escolha a função instalarAgendas no menu de cima e clique em Executar. Autorize.
 
 const AGENDAS_CTO = [
   {id: 'efai', seg: 'EFAI', nome: 'Olimpíadas CTO · Anos Iniciais (1º ao 5º ano)'},
@@ -33,7 +31,7 @@ const MESES_CTO = ['janeiro','fevereiro','março','abril','maio','junho','julho'
 const JANELA_CURTA_CTO = 14; // períodos de até 14 dias viram um evento só
 const LIMITE_MS_CTO = 5 * 60 * 1000; // para antes do limite de 6 min; a próxima rodada continua
 
-/** Rode UMA vez: cria as agendas, deixa públicas, agenda a sincronização e sincroniza. */
+// Rode UMA vez: cria as agendas, deixa públicas, agenda a sincronização e sincroniza.
 function instalarAgendas() {
   AGENDAS_CTO.forEach(a => agendaCTO_(a, true));
   ScriptApp.getProjectTriggers()
@@ -43,14 +41,14 @@ function instalarAgendas() {
   sincronizarAgendas();
 }
 
-/** Menu na planilha para sincronizar na hora. */
+// Menu na planilha para sincronizar na hora.
 function onOpen() {
   SpreadsheetApp.getUi().createMenu('Calendário CTO')
     .addItem('Sincronizar agendas públicas agora', 'sincronizarAgendas')
     .addToUi();
 }
 
-/** Copia as datas públicas da planilha para as 3 agendas (cria, altera e apaga o necessário). */
+// Copia as datas públicas da planilha para as 3 agendas (cria, altera e apaga o necessário).
 function sincronizarAgendas() {
   const inicio = Date.now();
   const lock = LockService.getScriptLock();
@@ -94,7 +92,7 @@ function sincronizarAgendas() {
   }
 }
 
-/* ---------- agendas ---------- */
+// ---------- agendas ----------
 function agendaCTO_(a, publicar) {
   const props = PropertiesService.getScriptProperties();
   const salvo = props.getProperty('agenda_' + a.id);
@@ -118,7 +116,7 @@ function agendaCTO_(a, publicar) {
   return cal;
 }
 
-/** Grava os endereços públicos na aba Listas (coluna L em diante), para o site usar. */
+// Grava os endereços públicos na aba Listas (coluna L em diante), para o site usar.
 function registrarNaPlanilha_(a, id) {
   const aba = SpreadsheetApp.getActive().getSheetByName('Listas');
   if (!aba) return;
@@ -127,7 +125,7 @@ function registrarNaPlanilha_(a, id) {
   aba.getRange(linha, 12, 1, 2).setValues([[a.nome, id]]);
 }
 
-/* ---------- leitura da planilha (mesma lógica do site) ---------- */
+// ---------- leitura da planilha (mesma lógica do site) ----------
 function montarEventosCTO_() {
   const ss = SpreadsheetApp.getActive();
   const oliLinhas = linhasCTO_(ss.getSheetByName('Olimpiadas'));
@@ -222,7 +220,7 @@ function anoIdxCTO_(v) {
   return /\bem\b|serie/.test(k) ? 8 + Number(n[1]) : Number(n[1]) - 1;
 }
 
-/* ---------- utilidades ---------- */
+// ---------- utilidades ----------
 function linhasCTO_(aba) {
   const v = aba.getDataRange().getValues();
   if (v.length < 2) return [];
