@@ -1,0 +1,35 @@
+name: Prévias por olimpíada
+
+on:
+  schedule:
+    - cron: "17 9 * * *"   # todo dia, 6h17 em Brasília
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths: ["scripts/previas/**", ".github/workflows/previas.yml"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: previas
+  cancel-in-progress: false
+
+jobs:
+  gerar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow==10.4.0
+      - run: python scripts/previas/gerar_previas.py
+      - name: Publicar se algo mudou
+        run: |
+          git add -A o
+          if git diff --cached --quiet; then echo "Nada mudou."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Prévias por olimpíada atualizadas a partir da planilha"
+          git push
