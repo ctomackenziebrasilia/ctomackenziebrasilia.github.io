@@ -1,5 +1,5 @@
 {
-  "name": "Calendário Olímpico CTO – Mackenzie Brasília",
+  "name": "Olimpíadas CTO",
   "short_name": "Olimpíadas CTO",
   "description": "Inscrições, provas, resultados e treinos das olimpíadas científicas do CTO – Colégio Mackenzie Brasília.",
   "lang": "pt-BR",
@@ -9,7 +9,17 @@
   "background_color": "#A8192E",
   "theme_color": "#A8192E",
   "icons": [
-    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
-    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }
