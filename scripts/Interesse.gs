@@ -8,7 +8,8 @@
 // Instalação (uma vez, logado só na conta do CTO):
 //   1. No mesmo projeto do Apps Script da planilha: + ao lado de "Arquivos" → Script → nome "Interesse" → cole este código.
 //   2. Escolha a função instalarFormulario no menu de cima e clique em Executar. Autorize.
-//   Lista de transmissão do WhatsApp: preencha WHATSAPP_CTO abaixo e rode ativarListaTransmissao (uma vez).
+//   Canal do WhatsApp: o link fica em CANAL_WHATSAPP_CTO, abaixo. Quem já tinha a versão com a lista de
+//   transmissão: cole este código no lugar do antigo e rode trocarListaPeloCanal (uma vez).
 
 const FORM_TITULO_CTO = 'CTO Mackenzie Brasília · Tenho interesse em uma olimpíada';
 const FORM_SEP_CTO = ' – '; // separa sigla e nome na lista; o site usa o mesmo separador
@@ -17,13 +18,12 @@ const SERIES_CTO = ['1º ano EF','2º ano EF','3º ano EF','4º ano EF','5º ano
 const CONFIRMAR_PARA_QUEM_PREENCHEU = true;
 // true = a conta do CTO também recebe um e-mail a cada novo interesse
 const AVISAR_CTO = false;
-// Número do WhatsApp do CTO que envia a lista de transmissão (com DDD), ex.: '(61) 99999-9999'.
-// Aparece na pergunta do formulário e no e-mail de confirmação: quem não salvar o número não recebe os avisos.
-const WHATSAPP_CTO = '';
-const PERGUNTA_AVISOS = 'Avisos pelo WhatsApp (opcional)';
-const OPCAO_AVISOS = 'Quero receber pelo WhatsApp avisos do CTO sobre olimpíadas (inscrições abertas, provas e treinos). Posso sair quando quiser.';
+// Link do Canal do WhatsApp do CTO (avisos). Aparece no formulário e no e-mail de confirmação.
+const CANAL_WHATSAPP_CTO = '';
+// Pergunta da antiga lista de transmissão: saiu do formulário, mas a coluna continua nas respostas antigas.
+const PERGUNTA_AVISOS_ANTIGA = 'Avisos pelo WhatsApp (opcional)';
 const PERGUNTAS_CTO = ['Olimpíada', 'Nome completo do aluno', 'Série', 'Turma', 'Quem está preenchendo?', 'E-mail para contato',
-  'WhatsApp (opcional)', 'Alguma observação? (opcional)', 'Autorização', PERGUNTA_AVISOS];
+  'WhatsApp (opcional)', 'Alguma observação? (opcional)', 'Autorização', PERGUNTA_AVISOS_ANTIGA];
 
 // Rode UMA vez: cria o formulário, a planilha privada de respostas, os avisos e a atualização diária.
 function instalarFormulario() {
@@ -53,17 +53,13 @@ function instalarFormulario() {
 }
 
 function montarPerguntas_(form) {
-  form.setDescription(
-    'Quer participar de uma olimpíada com o Centro de Treinamento Olímpico? Preencha e a equipe do CTO entra em contato.\n' +
-    'Este formulário registra só o seu interesse: a inscrição oficial vem depois, com a equipe.\n' +
-    'Os dados são usados apenas pela equipe do CTO para falar sobre a olimpíada escolhida e não são compartilhados.')
+  form.setDescription(descricaoForm_())
     .setCollectEmail(false)
     .setLimitOneResponsePerUser(false)
     .setAllowResponseEdits(false)
     .setShowLinkToRespondAgain(true)
     .setProgressBar(false)
-    .setConfirmationMessage('Recebemos o seu interesse! A equipe do CTO vai entrar em contato pelo e-mail informado. ' +
-      'Quer participar de outra olimpíada? Use o link "Enviar outra resposta".');
+    .setConfirmationMessage(confirmacaoForm_());
 
   form.addListItem().setTitle('Olimpíada').setHelpText('Se veio pelo site, ela já está marcada.').setRequired(true)
     .setChoiceValues(['(carregando)']);
@@ -75,38 +71,39 @@ function montarPerguntas_(form) {
     .setValidation(FormApp.createTextValidation().requireTextIsEmail().setHelpText('Digite um e-mail válido.').build());
   form.addTextItem().setTitle('WhatsApp (opcional)').setHelpText('Com DDD. Ex.: (61) 99999-9999').setRequired(false);
   form.addParagraphTextItem().setTitle('Alguma observação? (opcional)').setRequired(false);
-  perguntaAvisos_(form);
   form.addCheckboxItem().setTitle('Autorização').setRequired(true)
     .setChoiceValues(['Autorizo a equipe do CTO a usar estes dados apenas para contato sobre esta olimpíada.']);
 }
 
-function ajudaAvisos_() {
-  return 'Os avisos chegam pela lista de transmissão do CTO, no número informado acima. Para recebê-los, salve ' +
-    (WHATSAPP_CTO ? 'o número do CTO ' + WHATSAPP_CTO : 'o número do CTO') + ' nos contatos do celular. Para sair, responda SAIR.';
+const textoCanal_ = () => CANAL_WHATSAPP_CTO
+  ? 'Avisos do CTO no WhatsApp (inscrições abertas, provas e treinos): siga o canal do CTO em ' + CANAL_WHATSAPP_CTO
+  : '';
+function descricaoForm_() {
+  return 'Quer participar de uma olimpíada com o Centro de Treinamento Olímpico? Preencha e a equipe do CTO entra em contato.\n' +
+    'Este formulário registra só o seu interesse: a inscrição oficial vem depois, com a equipe.\n' +
+    'Os dados são usados apenas pela equipe do CTO para falar sobre a olimpíada escolhida e não são compartilhados.' +
+    (textoCanal_() ? '\n\n' + textoCanal_() : '');
 }
-function perguntaAvisos_(form) {
-  return form.addCheckboxItem().setTitle(PERGUNTA_AVISOS).setHelpText(ajudaAvisos_()).setRequired(false)
-    .setChoiceValues([OPCAO_AVISOS]);
+function confirmacaoForm_() {
+  return 'Recebemos o seu interesse! A equipe do CTO vai entrar em contato pelo e-mail informado. ' +
+    'Quer participar de outra olimpíada? Use o link "Enviar outra resposta".' + (textoCanal_() ? '\n\n' + textoCanal_() : '');
 }
 
-// Rode UMA vez para ligar a lista de transmissão: acrescenta ao formulário a pergunta opcional de
-// avisos pelo WhatsApp (antes de "Autorização") e cria a aba "Lista de transmissão" na planilha privada.
-// Pode rodar de novo depois de preencher WHATSAPP_CTO: só atualiza o texto de ajuda.
-function ativarListaTransmissao() {
+// Rode UMA vez para trocar a lista de transmissão pelo Canal do WhatsApp (pode rodar de novo sem problema):
+// tira do formulário a pergunta antiga de avisos, põe o link do canal na descrição e na mensagem final,
+// apaga a aba "Lista de transmissão" da planilha privada e reorganiza as outras abas.
+// As respostas antigas não são apagadas (a coluna antiga fica escondida na aba Interessados).
+function trocarListaPeloCanal() {
+  if (!CANAL_WHATSAPP_CTO) throw new Error('Preencha CANAL_WHATSAPP_CTO no topo deste arquivo antes de rodar.');
   const props = PropertiesService.getScriptProperties();
   const form = FormApp.openById(props.getProperty('form_id'));
-  let item = form.getItems().filter(i => i.getTitle() === PERGUNTA_AVISOS)[0];
-  if (!item) {
-    item = perguntaAvisos_(form);
-    const aut = form.getItems().filter(i => i.getTitle() === 'Autorização')[0];
-    if (aut) form.moveItem(item.getIndex(), aut.getIndex());
-    SpreadsheetApp.flush();
-    Utilities.sleep(4000);
-  } else {
-    item.setHelpText(ajudaAvisos_());
-  }
+  form.getItems().filter(i => i.getTitle() === PERGUNTA_AVISOS_ANTIGA).forEach(i => form.deleteItem(i));
+  form.setDescription(descricaoForm_()).setConfirmationMessage(confirmacaoForm_());
+  const ss = SpreadsheetApp.openById(props.getProperty('respostas_id'));
+  const lista = ss.getSheetByName('Lista de transmissão');
+  if (lista) ss.deleteSheet(lista);
   organizarPlanilhaInteressados();
-  if (!WHATSAPP_CTO) console.log('Atenção: preencha WHATSAPP_CTO no topo deste arquivo e rode de novo, para o número aparecer no formulário e no e-mail.');
+  console.log('Pronto: formulário e planilha agora indicam o canal ' + CANAL_WHATSAPP_CTO);
 }
 
 // Mantém a lista de olimpíadas do formulário igual à aba Olimpiadas (roda todo dia às 5h).
@@ -152,10 +149,7 @@ function avisarNovoInteresse(e) {
     name: 'Calendário Olímpico CTO',
   });
   const contato = resp['E-mail para contato'];
-  const querAvisos = String(resp[PERGUNTA_AVISOS] || '').indexOf('Quero') >= 0 && resp['WhatsApp (opcional)'];
-  const avisos = querAvisos ? '\n\nVocê pediu para receber avisos do CTO pelo WhatsApp no número ' + resp['WhatsApp (opcional)'] + '. ' +
-    'Para que eles cheguem, salve ' + (WHATSAPP_CTO ? 'o número do CTO ' + WHATSAPP_CTO : 'o número do CTO') + ' nos contatos do celular. ' +
-    'Para sair da lista, é só responder SAIR.' : '';
+  const avisos = textoCanal_() ? '\n\n' + textoCanal_() + ' (só o CTO publica; ninguém vê o seu número).' : '';
   if (CONFIRMAR_PARA_QUEM_PREENCHEU && contato) {
     MailApp.sendEmail({
       to: contato,
@@ -198,11 +192,11 @@ function organizarPlanilhaInteressados() {
   resp.getRange(2, 1, resp.getMaxRows() - 1, 1).setNumberFormat('dd/mm/yyyy hh:mm');
   const larg = {'Carimbo de data/hora': 125, 'Olimpíada': 280, 'Nome completo do aluno': 220, 'Série': 105, 'Turma': 70,
     'Quem está preenchendo?': 135, 'E-mail para contato': 220, 'WhatsApp (opcional)': 140, 'Alguma observação? (opcional)': 220,
-    'Autorização': 90, [PERGUNTA_AVISOS]: 120};
+    'Autorização': 90};
   Object.keys(larg).forEach(h => { if (colDe(h)) resp.setColumnWidth(colDe(h), larg[h]); });
   resp.setColumnWidth(colStatus, 150); resp.setColumnWidth(colNotas, 260);
   if (colDe('Autorização')) resp.hideColumns(colDe('Autorização')); // sempre marcada (obrigatória)
-  if (colDe(PERGUNTA_AVISOS)) resp.getRange(2, colDe(PERGUNTA_AVISOS), resp.getMaxRows() - 1, 1).setWrap(false);
+  if (colDe(PERGUNTA_AVISOS_ANTIGA)) resp.hideColumns(colDe(PERGUNTA_AVISOS_ANTIGA)); // pergunta antiga, fora de uso
   resp.getRange(2, colStatus, resp.getMaxRows() - 1, 1).setDataValidation(
     SpreadsheetApp.newDataValidation().requireValueInList(['A contatar', 'Contatado', 'Inscrito', 'Não vai participar'], true)
       .setAllowInvalid(false).setHelpText('Atualize depois de falar com a família.').build());
@@ -269,40 +263,6 @@ function organizarPlanilhaInteressados() {
       .setFontColor('#7A5600').setBold(true).setRanges([res.getRange('E10:E60')]).build(),
   ]);
 
-  // --- Lista de transmissão (só quem marcou a pergunta de avisos) ---
-  let lista = ss.getSheetByName('Lista de transmissão');
-  const cAv = colDe(PERGUNTA_AVISOS), cW = colDe('WhatsApp (opcional)');
-  if (cAv && cW) {
-    if (!lista) lista = ss.insertSheet('Lista de transmissão');
-    lista.getRange('B1:F7').clearContent(); lista.getRange('B8:E8').clearContent();
-    lista.getRange('B9').clearContent();
-    lista.setHiddenGridlines(true); lista.setTabColor('#1E6B3A');
-    lista.setColumnWidth(1, 20); [170, 240, 110, 110, 30, 200].forEach((w, i) => lista.setColumnWidth(i + 2, w));
-    lista.getRange('A1:G60').setFontFamily('Roboto').setFontColor(TINTA).setVerticalAlignment('middle');
-    lista.getRange('B2').setValue('Lista de transmissão do WhatsApp').setFontSize(20).setFontWeight('bold');
-    lista.getRange('B3').setValue('Só quem marcou "Quero receber avisos" no formulário. Use apenas para os avisos do CTO; não copie para grupos.')
-      .setFontColor(BORDO).setFontSize(10).setFontWeight('bold');
-    lista.getRange('B4').setValue('Novos números: adicione na lista de transmissão do celular do CTO. Quem pedir para sair: cole o número na coluna G e tire da lista no celular.')
-      .setFontColor(CINZA).setFontSize(10);
-    lista.getRange('B5').setValue('Na lista'); lista.getRange('B5').setFontSize(9).setFontColor(CINZA).setFontWeight('bold');
-    lista.getRange('B6').setFormula('=IF(OR(B9="";ISNUMBER(SEARCH("Ninguém";B9)));0;COUNTA(B9:B))').setFontSize(24).setFontWeight('bold').setHorizontalAlignment('left');
-    lista.getRange('B5:B6').setBackground(CLARO); lista.setRowHeight(6, 46);
-    lista.getRange('B8:E8').setValues([['WhatsApp', 'Aluno', 'Série', 'Desde']]).setBackground('#1E6B3A').setFontColor('#FFFFFF').setFontWeight('bold');
-    lista.getRange('G8').setValue('Pediu para sair (número)').setBackground('#5C2A32').setFontColor('#FFFFFF').setFontWeight('bold');
-    const W = I + colLetra_(cW) + '2:' + colLetra_(cW), AV = I + colLetra_(cAv) + '2:' + colLetra_(cAv);
-    lista.getRange('B9').setFormula('=IFERROR(LET(nrm;LAMBDA(x;LET(d;REGEXREPLACE(TO_TEXT(x);"\\D";"");IF(d="";"";IF(LEN(d)<=11;"55"&d;d))));' +
-      'n;MAP(' + W + ';nrm);s;MAP(G9:G;nrm);' +
-      'f;FILTER(HSTACK(n;' + I + 'C2:C;' + I + 'D2:D;' + I + 'A2:A);ISNUMBER(SEARCH("Quero";' + AV + '));n<>"";ISNA(MATCH(n;s;0)));' +
-      'SORTN(f;9^9;2;1;TRUE));"Ninguém pediu para entrar na lista ainda.")');
-    lista.getRange('B9:B').setNumberFormat('@'); lista.getRange('E9:E').setNumberFormat('dd/mm/yyyy');
-    lista.setFrozenRows(8);
-    lista.getProtections(SpreadsheetApp.ProtectionType.RANGE).forEach(p => p.remove());
-    lista.getRange('B1:E').protect().setDescription('Montado automaticamente a partir do formulário').setWarningOnly(true);
-    res.getRange(5, 6).setValue('Na lista do WhatsApp').setFontSize(9).setFontColor(CINZA).setFontWeight('bold');
-    res.getRange(6, 6).setFormula("='Lista de transmissão'!B6").setFontSize(24).setFontWeight('bold').setHorizontalAlignment('left').setFontColor('#1E6B3A');
-    res.getRange(5, 6, 2, 1).setBackground(CLARO);
-  }
-
   // --- Como usar ---
   let ajuda = ss.getSheetByName('Como usar') || ss.insertSheet('Como usar');
   ajuda.clear(); ajuda.setHiddenGridlines(true); ajuda.setTabColor(CINZA);
@@ -316,7 +276,7 @@ function organizarPlanilhaInteressados() {
     ['4.  Para ver só uma olimpíada: na aba "Interessados", clique no ícone de filtro do título "Olimpíada" e marque a desejada.', 11, false],
     ['5.  A aba "Resumo" mostra os totais e quantos ainda faltam contatar em cada olimpíada. Ela se atualiza sozinha.', 11, false],
     ['6.  Não edite as colunas que vêm do formulário (as de título bordô, antes de "Contato (equipe)"). Não apague a aba "Interessados" nem mude a ordem das colunas.', 11, false],
-    ['7.  Aba "Lista de transmissão": números de quem pediu avisos pelo WhatsApp, sem repetição. Adicione os novos na lista de transmissão do celular do CTO. Quem responder SAIR: cole o número na coluna G e tire da lista no celular.', 11, false],
+    ['7.  Avisos gerais (inscrições abertas, provas, treinos) vão pelo Canal do WhatsApp do CTO, que o próprio aluno ou responsável segue. Não adicione números desta planilha em grupos ou listas.', 11, false],
     ['', 10, false],
     ['Privacidade: são dados de alunos, em grande parte menores de idade. Use só para o contato sobre a olimpíada escolhida e não compartilhe esta planilha fora da equipe do CTO. Para apagar os dados de alguém que pedir, apague a linha inteira.', 10, true],
   ];
@@ -326,9 +286,8 @@ function organizarPlanilhaInteressados() {
   // ordem das abas e limpeza
   ss.setActiveSheet(res); ss.moveActiveSheet(1);
   ss.setActiveSheet(resp); ss.moveActiveSheet(2);
-  if (lista) { ss.setActiveSheet(lista); ss.moveActiveSheet(3); }
-  ss.setActiveSheet(ajuda); ss.moveActiveSheet(lista ? 4 : 3);
-  ['Página1', 'Sheet1'].forEach(n => { const s = ss.getSheetByName(n); if (s && ss.getSheets().length > (lista ? 4 : 3)) ss.deleteSheet(s); });
+  ss.setActiveSheet(ajuda); ss.moveActiveSheet(3);
+  ['Página1', 'Sheet1'].forEach(n => { const s = ss.getSheetByName(n); if (s && ss.getSheets().length > 3) ss.deleteSheet(s); });
   ss.setActiveSheet(res);
   console.log('Planilha de interessados organizada: ' + ss.getUrl());
 }
@@ -339,7 +298,7 @@ function manterEspaco_() {
   const id = PropertiesService.getScriptProperties().getProperty('respostas_id');
   if (!id) return;
   const ss = SpreadsheetApp.openById(id);
-  [['Interessados', 300, 1000], ['Resumo', 50, 200], ['Lista de transmissão', 100, 500]].forEach(([nome, folga, lote]) => {
+  [['Interessados', 300, 1000], ['Resumo', 50, 200]].forEach(([nome, folga, lote]) => {
     const sh = ss.getSheetByName(nome);
     if (!sh) return;
     const ult = Math.max(sh.getLastRow(), 2), max = sh.getMaxRows();
