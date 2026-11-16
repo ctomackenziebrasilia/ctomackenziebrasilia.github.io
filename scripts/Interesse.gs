@@ -100,6 +100,7 @@ function corrigirSerie() {
 
 // Mantém a lista de olimpíadas do formulário igual à aba Olimpiadas (roda todo dia às 5h).
 function atualizarListaOlimpiadas() {
+  try { manterEspaco_(); } catch (err) { console.log('manterEspaco_: ' + err); }
   const form = FormApp.openById(PropertiesService.getScriptProperties().getProperty('form_id'));
   const aba = SpreadsheetApp.getActive().getSheetByName('Olimpiadas');
   const v = aba.getDataRange().getValues();
@@ -123,6 +124,7 @@ function perguntaOlimpiada_(form) {
 
 // A cada resposta: confirmação para quem preencheu e, se ligado, aviso para a conta do CTO.
 function avisarNovoInteresse(e) {
+  try { manterEspaco_(); } catch (err) { console.log('manterEspaco_: ' + err); }
   const resp = {};
   e.response.getItemResponses().forEach(r => {
     const v = r.getResponse();
@@ -272,6 +274,20 @@ function organizarPlanilhaInteressados() {
   ['Página1', 'Sheet1'].forEach(n => { const s = ss.getSheetByName(n); if (s && ss.getSheets().length > 3) ss.deleteSheet(s); });
   ss.setActiveSheet(res);
   console.log('Planilha de interessados organizada: ' + ss.getUrl());
+}
+// Sem limite de linhas: mantém sempre uma folga de linhas vazias nas abas da planilha privada.
+// As linhas são inseridas DENTRO da área já formatada, então cores, menu de situação e
+// fórmulas crescem junto (inserir no fim da planilha não estenderia as regras).
+function manterEspaco_() {
+  const id = PropertiesService.getScriptProperties().getProperty('respostas_id');
+  if (!id) return;
+  const ss = SpreadsheetApp.openById(id);
+  [['Interessados', 300, 1000], ['Resumo', 50, 200]].forEach(([nome, folga, lote]) => {
+    const sh = ss.getSheetByName(nome);
+    if (!sh) return;
+    const ult = Math.max(sh.getLastRow(), 2), max = sh.getMaxRows();
+    if (max - ult < folga) sh.insertRowsAfter(Math.min(ult, max - 1), lote);
+  });
 }
 function ensureCols_(sh, n) { if (sh.getMaxColumns() < n) sh.insertColumnsAfter(sh.getMaxColumns(), n - sh.getMaxColumns()); }
 function colLetra_(n) { let s = ''; while (n > 0) { const m = (n - 1) % 26; s = String.fromCharCode(65 + m) + s; n = Math.floor((n - 1) / 26); } return s; }
