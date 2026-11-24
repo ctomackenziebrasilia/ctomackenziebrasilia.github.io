@@ -45,6 +45,7 @@ function instalarAgendas() {
 function onOpen() {
   SpreadsheetApp.getUi().createMenu('Calendário CTO')
     .addItem('Sincronizar agendas públicas agora', 'sincronizarAgendas')
+    .addItem('Definir senhas do painel', 'definirSenhasPainel') // função do arquivo Painel
     .addToUi();
 }
 
